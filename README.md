@@ -3,7 +3,7 @@
 Swift client for [Sentry](https://www.getsentry.com/welcome/).
 
 
-## Installation
+//TODO: ## Installation
 
 The easiest way is to use [CocoaPods](http://cocoapods.org). It takes care of all required frameworks and third party dependencies:
 
