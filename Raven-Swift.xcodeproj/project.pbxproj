@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		650712C519BB16A500786DC4 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 650712C419BB16A500786DC4 /* UncaughtExceptionHandler.m */; };
+		650712C819BB1E7B00786DC4 /* RavenClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650712C619BB1E7B00786DC4 /* RavenClient.swift */; };
+		650712C919BB1E7B00786DC4 /* RavenConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650712C719BB1E7B00786DC4 /* RavenConfig.swift */; };
+		650712CC19BB1E8700786DC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650712CA19BB1E8700786DC4 /* AppDelegate.swift */; };
+		650712CD19BB1E8700786DC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650712CB19BB1E8700786DC4 /* ViewController.swift */; };
+		652C5DED19B7AA2D002CD4A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652C5DEB19B7AA2D002CD4A9 /* Main.storyboard */; };
+		652C5DEF19B7AA2D002CD4A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652C5DEE19B7AA2D002CD4A9 /* Images.xcassets */; };
+		65FA47A219BBBF46007D13BD /* RavenConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650712C719BB1E7B00786DC4 /* RavenConfig.swift */; };
+		65FA47A319BBC1E5007D13BD /* Raven-Swift.app in Resources */ = {isa = PBXBuildFile; fileRef = 652C5DE219B7AA2C002CD4A9 /* Raven-Swift.app */; };
+		65FA47A419BBC260007D13BD /* RavenClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650712C619BB1E7B00786DC4 /* RavenClient.swift */; };
+		65FA47A519BBC266007D13BD /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 650712C419BB16A500786DC4 /* UncaughtExceptionHandler.m */; };
+		65FA47A619BBC26B007D13BD /* RavenClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6546863519BBBDD100985C7D /* RavenClientTests.swift */; };
+		65FA47A719BBC26F007D13BD /* RavenConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6546863619BBBDD100985C7D /* RavenConfigTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		652C5DF519B7AA2D002CD4A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 652C5DDA19B7AA2C002CD4A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 652C5DE119B7AA2C002CD4A9;
+			remoteInfo = "Raven-Swift";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		650712C219BB16A500786DC4 /* Raven-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Raven-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
+		650712C319BB16A500786DC4 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		650712C419BB16A500786DC4 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
+		650712C619BB1E7B00786DC4 /* RavenClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RavenClient.swift; sourceTree = "<group>"; };
+		650712C719BB1E7B00786DC4 /* RavenConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RavenConfig.swift; sourceTree = "<group>"; };
+		650712CA19BB1E8700786DC4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		650712CB19BB1E8700786DC4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		652C5DE219B7AA2C002CD4A9 /* Raven-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Raven-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		652C5DE619B7AA2D002CD4A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		652C5DEC19B7AA2D002CD4A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		652C5DEE19B7AA2D002CD4A9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		652C5DF419B7AA2D002CD4A9 /* RavenSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RavenSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		652C5DF919B7AA2D002CD4A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6546863419BBBD7D00985C7D /* Raven-SwiftTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Raven-SwiftTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		6546863519BBBDD100985C7D /* RavenClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RavenClientTests.swift; sourceTree = "<group>"; };
+		6546863619BBBDD100985C7D /* RavenConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RavenConfigTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		652C5DDF19B7AA2C002CD4A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		652C5DF119B7AA2D002CD4A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		652C5DD919B7AA2C002CD4A9 = {
+			isa = PBXGroup;
+			children = (
+				652C5E0719B7AC00002CD4A9 /* Raven */,
+				652C5DE419B7AA2C002CD4A9 /* Example */,
+				652C5DF719B7AA2D002CD4A9 /* Raven-SwiftTests */,
+				652C5DE319B7AA2C002CD4A9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		652C5DE319B7AA2C002CD4A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				652C5DE219B7AA2C002CD4A9 /* Raven-Swift.app */,
+				652C5DF419B7AA2D002CD4A9 /* RavenSwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		652C5DE419B7AA2C002CD4A9 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				650712CA19BB1E8700786DC4 /* AppDelegate.swift */,
+				650712CB19BB1E8700786DC4 /* ViewController.swift */,
+				652C5DEB19B7AA2D002CD4A9 /* Main.storyboard */,
+				652C5DEE19B7AA2D002CD4A9 /* Images.xcassets */,
+				652C5DE519B7AA2C002CD4A9 /* Supporting Files */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		652C5DE519B7AA2C002CD4A9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				652C5DE619B7AA2D002CD4A9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		652C5DF719B7AA2D002CD4A9 /* Raven-SwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				6546863519BBBDD100985C7D /* RavenClientTests.swift */,
+				6546863619BBBDD100985C7D /* RavenConfigTests.swift */,
+				6546863419BBBD7D00985C7D /* Raven-SwiftTests-Bridging-Header.h */,
+				652C5DF819B7AA2D002CD4A9 /* Supporting Files */,
+			);
+			path = "Raven-SwiftTests";
+			sourceTree = "<group>";
+		};
+		652C5DF819B7AA2D002CD4A9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				652C5DF919B7AA2D002CD4A9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		652C5E0719B7AC00002CD4A9 /* Raven */ = {
+			isa = PBXGroup;
+			children = (
+				650712C619BB1E7B00786DC4 /* RavenClient.swift */,
+				650712C719BB1E7B00786DC4 /* RavenConfig.swift */,
+				650712C319BB16A500786DC4 /* UncaughtExceptionHandler.h */,
+				650712C419BB16A500786DC4 /* UncaughtExceptionHandler.m */,
+				650712C219BB16A500786DC4 /* Raven-Swift-Bridging-Header.h */,
+			);
+			path = Raven;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		652C5DE119B7AA2C002CD4A9 /* Raven-Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 652C5DFE19B7AA2D002CD4A9 /* Build configuration list for PBXNativeTarget "Raven-Swift" */;
+			buildPhases = (
+				652C5DDE19B7AA2C002CD4A9 /* Sources */,
+				652C5DDF19B7AA2C002CD4A9 /* Frameworks */,
+				652C5DE019B7AA2C002CD4A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Raven-Swift";
+			productName = "Raven-Swift";
+			productReference = 652C5DE219B7AA2C002CD4A9 /* Raven-Swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		652C5DF319B7AA2D002CD4A9 /* Raven-SwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 652C5E0119B7AA2D002CD4A9 /* Build configuration list for PBXNativeTarget "Raven-SwiftTests" */;
+			buildPhases = (
+				652C5DF019B7AA2D002CD4A9 /* Sources */,
+				652C5DF119B7AA2D002CD4A9 /* Frameworks */,
+				652C5DF219B7AA2D002CD4A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				652C5DF619B7AA2D002CD4A9 /* PBXTargetDependency */,
+			);
+			name = "Raven-SwiftTests";
+			productName = "Raven-SwiftTests";
+			productReference = 652C5DF419B7AA2D002CD4A9 /* RavenSwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		652C5DDA19B7AA2C002CD4A9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = OKB;
+				TargetAttributes = {
+					652C5DE119B7AA2C002CD4A9 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					652C5DF319B7AA2D002CD4A9 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 652C5DE119B7AA2C002CD4A9;
+					};
+				};
+			};
+			buildConfigurationList = 652C5DDD19B7AA2C002CD4A9 /* Build configuration list for PBXProject "Raven-Swift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 652C5DD919B7AA2C002CD4A9;
+			productRefGroup = 652C5DE319B7AA2C002CD4A9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				652C5DE119B7AA2C002CD4A9 /* Raven-Swift */,
+				652C5DF319B7AA2D002CD4A9 /* Raven-SwiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		652C5DE019B7AA2C002CD4A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				652C5DED19B7AA2D002CD4A9 /* Main.storyboard in Resources */,
+				652C5DEF19B7AA2D002CD4A9 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		652C5DF219B7AA2D002CD4A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65FA47A319BBC1E5007D13BD /* Raven-Swift.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		652C5DDE19B7AA2C002CD4A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				650712CD19BB1E8700786DC4 /* ViewController.swift in Sources */,
+				650712CC19BB1E8700786DC4 /* AppDelegate.swift in Sources */,
+				650712C519BB16A500786DC4 /* UncaughtExceptionHandler.m in Sources */,
+				650712C919BB1E7B00786DC4 /* RavenConfig.swift in Sources */,
+				650712C819BB1E7B00786DC4 /* RavenClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		652C5DF019B7AA2D002CD4A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65FA47A719BBC26F007D13BD /* RavenConfigTests.swift in Sources */,
+				65FA47A219BBBF46007D13BD /* RavenConfig.swift in Sources */,
+				65FA47A419BBC260007D13BD /* RavenClient.swift in Sources */,
+				65FA47A519BBC266007D13BD /* UncaughtExceptionHandler.m in Sources */,
+				65FA47A619BBC26B007D13BD /* RavenClientTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		652C5DF619B7AA2D002CD4A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 652C5DE119B7AA2C002CD4A9 /* Raven-Swift */;
+			targetProxy = 652C5DF519B7AA2D002CD4A9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		652C5DEB19B7AA2D002CD4A9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				652C5DEC19B7AA2D002CD4A9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		652C5DFC19B7AA2D002CD4A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_MODULE_NAME = Raven;
+				PRODUCT_NAME = "Raven-Swift";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		652C5DFD19B7AA2D002CD4A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = Raven;
+				PRODUCT_NAME = "Raven-Swift";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		652C5DFF19B7AA2D002CD4A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				INFOPLIST_FILE = Example/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_MODULE_NAME = Raven;
+				PRODUCT_NAME = "Raven-Swift";
+				SWIFT_OBJC_BRIDGING_HEADER = "Raven/Raven-Swift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		652C5E0019B7AA2D002CD4A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				INFOPLIST_FILE = Example/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_MODULE_NAME = Raven;
+				PRODUCT_NAME = "Raven-Swift";
+				SWIFT_OBJC_BRIDGING_HEADER = "Raven/Raven-Swift-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		652C5E0219B7AA2D002CD4A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Raven-SwiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = RavenSwiftTests;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Raven-SwiftTests/Raven-SwiftTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Raven-Swift.app/Raven-Swift";
+			};
+			name = Debug;
+		};
+		652C5E0319B7AA2D002CD4A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Raven-SwiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = RavenSwiftTests;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Raven-SwiftTests/Raven-SwiftTests-Bridging-Header.h";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Raven-Swift.app/Raven-Swift";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		652C5DDD19B7AA2C002CD4A9 /* Build configuration list for PBXProject "Raven-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				652C5DFC19B7AA2D002CD4A9 /* Debug */,
+				652C5DFD19B7AA2D002CD4A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		652C5DFE19B7AA2D002CD4A9 /* Build configuration list for PBXNativeTarget "Raven-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				652C5DFF19B7AA2D002CD4A9 /* Debug */,
+				652C5E0019B7AA2D002CD4A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		652C5E0119B7AA2D002CD4A9 /* Build configuration list for PBXNativeTarget "Raven-SwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				652C5E0219B7AA2D002CD4A9 /* Debug */,
+				652C5E0319B7AA2D002CD4A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 652C5DDA19B7AA2C002CD4A9 /* Project object */;
+}
