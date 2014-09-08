@@ -3,7 +3,6 @@
 //  Raven-Swift
 //
 //  Created by Tommy Mikalsen on 03.09.14.
-//  Copyright (c) 2014 OKB. All rights reserved.
 //
 
 import UIKit
