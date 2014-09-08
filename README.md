@@ -13,13 +13,13 @@ pod 'Raven-swift'
 
 **Alternatively**, you can install manually.
 
-1. Get the code: `git clone git://github.com/getsentry/raven-swift`
+1. Get the code: `git clone git://github.com/timorzadir/raven-swift`
 2. Drag the `Raven` subfolder to your project. Check both "copy items into destination group's folder" and your target.
 
 Alternatively you can add this code as a Git submodule:
 
 1. `cd [your project root]`
-2. `git submodule add git://github.com/getsentry/raven-swift`
+2. `git submodule add git://github.com/timorzadir/raven-swift`
 3. Drag the `Raven` subfolder to your project. Uncheck the "copy items into destination group's folder" box, do check your target.
 
 
@@ -86,15 +86,15 @@ RavenCaptureError(error);
 
 Have a bug? Please create an issue on GitHub!
 
-https://github.com/getsentry/raven-swift/issues
+https://github.com/timorzadir/raven-swift/issues
 
 
 ## Contributing
 
 raven-swift is an open source project and your contribution is very much appreciated.
 
-1. Check for [open issues](https://github.com/getsentry/raven-swift/issues) or [open a fresh issue](https://github.com/getsentry/raven-swift/issues/new) to start a discussion around a feature idea or a bug.
-2. Fork the [repository on Github](https://github.com/getsentry/raven-swift) and make your changes.
+1. Check for [open issues](https://github.com/timorzadir/raven-swift/issues) or [open a fresh issue](https://github.com/timorzadir/raven-swift/issues/new) to start a discussion around a feature idea or a bug.
+2. Fork the [repository on Github](https://github.com/timorzadir/raven-swift) and make your changes.
 3. Make sure to add yourself to AUTHORS and send a pull request.
 
 
