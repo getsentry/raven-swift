@@ -28,8 +28,14 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     var tags : [String : String]
     let logger : String?
     internal let config : RavenConfig
-    private var _dateFormatter : NSDateFormatter?
     private var receivedData : NSMutableData?
+    private var dateFormatter : NSDateFormatter {
+        let timeZone = NSTimeZone(name: "UTC")
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return dateFormatter
+    }
     
     class func sharedClient() -> RavenClient? {
         return _RavenClientSharedInstance
@@ -98,19 +104,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     func exceptionHandler(exception: NSException) {
         RavenClient.sharedClient()?.captureException(exception, sendNow: false)
     }
-    
-    
-    
-    func dateFormatter() -> NSDateFormatter {
-        if (_dateFormatter == nil) {
-            let timeZone = NSTimeZone(name: "UTC")
-            _dateFormatter = NSDateFormatter()
-            _dateFormatter?.timeZone = timeZone
-            _dateFormatter?.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        }
-        
-        return _dateFormatter!;
-    }
+
     
     func setDefaultTags() {
         let build: String? = tags["Build version"]
@@ -315,7 +309,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         
         var returnDict : [String: AnyObject] = ["event_id" : self.generateUUID(),
             "project" : self.config.projectId!,
-            "timestamp" : self.dateFormatter().stringFromDate(NSDate()),
+            "timestamp" : self.dateFormatter.stringFromDate(NSDate()),
             "level" : level.toRaw(),
             "platform": "swift",
             "extra": extra,
