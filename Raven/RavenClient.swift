@@ -168,6 +168,14 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         self.sendDictionary(data)
     }
     
+    func captureError(error : NSError, method: String?, file: String?, line: Int){
+        RavenClient.sharedClient()?.captureMessage("\(error)", level: .kRavenLogLevelDebugError, method: method, file: file, line: line )
+    }
+    
+    func captureError(error : NSError){
+        RavenClient.sharedClient()?.captureMessage("\(error)", level: .kRavenLogLevelDebugError, method: nil, file: nil, line: 0 )
+    }
+    
     func captureException(exception :NSException) {
         self.captureException(exception, sendNow:true)
     }
