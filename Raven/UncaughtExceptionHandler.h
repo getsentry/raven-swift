@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-volatile void exceptionHandler(NSException *exception);
+void exceptionHandler(NSException *exception);
 extern NSUncaughtExceptionHandler *exceptionHandlerPtr;
 
 @interface UncaughtExceptionHandler : NSObject 

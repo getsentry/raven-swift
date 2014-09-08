@@ -11,7 +11,7 @@
 
 @implementation UncaughtExceptionHandler
 
-volatile void exceptionHandler(NSException *exception) {
+void exceptionHandler(NSException *exception) {
     [[RavenClient sharedClient] captureException:exception sendNow:NO];
 }
 
