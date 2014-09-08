@@ -53,11 +53,13 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         self.init(config: config, extra: extra, tags: tags, logger: nil)
         
     }
+    
     convenience init(config: RavenConfig, extra: [String: AnyObject])
     {
         self.init(config: config, extra: extra, tags: [:], logger: nil)
         
     }
+    
     convenience init(config: RavenConfig)
     {
         self.init(config: config, extra: [:], tags: [:], logger: nil)
@@ -81,30 +83,25 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         return client
     }
     
-    
     class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: String]) -> RavenClient?
     {
         return RavenClient.clientWithDSN(DSN, extra: extra, tags: tags, logger: nil)
     }
-    
     
     class func clientWithDSN(DSN: String, extra: [String: AnyObject]) -> RavenClient?
     {
         return RavenClient.clientWithDSN(DSN, extra: extra, tags: [:])
     }
     
-    
     class func clientWithDSN(DSN: String) -> RavenClient?
     {
         return RavenClient.clientWithDSN(DSN, extra: [:])
     }
     
-    
     func exceptionHandler(exception: NSException) {
         RavenClient.sharedClient()?.captureException(exception, sendNow: false)
     }
 
-    
     func setDefaultTags() {
         let build: String? = tags["Build version"]
         if (build == nil) {
@@ -129,10 +126,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         #endif
 
     }
-    
 
-    
-//MARK Messages
     func captureMessage(message : String)
     {
         self.captureMessage(message, level: RavenLogLevel.kRavenLogLevelDebugInfo)
@@ -179,11 +173,9 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         self.captureException(exception, sendNow:true)
     }
     
-    
     func captureException(exception: NSException, sendNow: Bool) {
         self.captureException(exception, additionalExtra:[:], additionalTags:[:], sendNow:sendNow)
     }
-    
     
     func captureException(exception:NSException, additionalExtra:[String: AnyObject], additionalTags: [String: String], sendNow:Bool) {
         
@@ -268,7 +260,6 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         }
     }
 
-    
     func setupExceptionHandler() {
     
         NSSetUncaughtExceptionHandler(exceptionHandlerPtr)
@@ -285,14 +276,37 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
-    
 
+    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+        let userInfo: [String: AnyObject] = error.userInfo as [String: AnyObject]
+        let errorKey: AnyObject? = userInfo[NSURLErrorFailingURLStringErrorKey]
+        println("Connection failed! Error - \(error.localizedDescription) \(errorKey)")
+    }
+    
+    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+        self.receivedData?.length = 0
+    }
+    
+    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+        self.receivedData?.appendData(data)
+    }
+    
+    func connectionDidFinishLoading(connection: NSURLConnection) {
+        println("JSON sent to Sentry")
+    }
+    
+    internal func sendDictionary(dict: [String: AnyObject]) {
+        var error : NSError? = nil;
+        let JSON = self.encodeJSON(dict)
+        self.sendJSON(JSON)
+    }
+    
     internal func generateUUID() -> String {
         let uuid = NSUUID.UUID().UUIDString
         let res = uuid.stringByReplacingOccurrencesOfString("-", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         return res
     }
-
+    
     private func prepareDictionaryForMessage(message: String,
         level: RavenLogLevel,
         additionalExtra: [String : AnyObject],
@@ -328,17 +342,11 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
             "exception" : exception]
         
         return returnDict
-     }
+    }
     
     private func encodeJSON(obj: AnyObject) -> NSData? {
         let data = NSJSONSerialization.dataWithJSONObject(obj, options: nil , error:nil)
         return data
-    }
-    
-    internal func sendDictionary(dict: [String: AnyObject]) {
-        var error : NSError? = nil;
-        let JSON = self.encodeJSON(dict)
-        self.sendJSON(JSON)
     }
     
     private func sendJSON(JSON: NSData?)
@@ -360,25 +368,5 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         self.receivedData = NSMutableData()
         let debug = NSString(data: JSON!, encoding: NSUTF8StringEncoding)
         println(debug)
-    }
-    
-    
-    //#pragma mark - NSURLConnectionDelegate
-    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
-        let userInfo: [String: AnyObject] = error.userInfo as [String: AnyObject]
-        let errorKey: AnyObject? = userInfo[NSURLErrorFailingURLStringErrorKey]
-        println("Connection failed! Error - \(error.localizedDescription) \(errorKey)")
-    }
-    
-    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
-        self.receivedData?.length = 0
-    }
-    
-    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
-        self.receivedData?.appendData(data)
-    }
-    
-    func connectionDidFinishLoading(connection: NSURLConnection) {
-        println("JSON sent to Sentry")
     }
 }
