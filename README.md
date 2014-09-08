@@ -67,12 +67,17 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 }
 ```
 
-//TODO: You can also capture errors:
+You can also capture errors:
 
 ```swift
-NSError *error;
-[[NSFileManager defaultManager] removeItemAtPath:@"some/path" error:&error];
-RavenCaptureError(error);
+var error: NSError?
+NSFileManager.defaultManager().removeItemAtPath("some/path", error: &error)
+
+// Sending basic error 
+RavenClient.sharedClient()?.captureError(error!)
+
+// Sending error with method, file and line number 
+RavenClient.sharedClient()?.captureError(error!, method: __FUNCTION__, file: __FILE__, line: __LINE__)
 ```
 
 *Note: when using the global exception handler, exceptions will be sent the __next__ time the app is started.*
