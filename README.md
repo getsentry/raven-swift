@@ -3,9 +3,10 @@
 Swift client for [Sentry](https://www.getsentry.com/welcome/).
 
 
-//TODO: ## Installation
+## Installation
 
-The easiest way is to use [CocoaPods](http://cocoapods.org). It takes care of all required frameworks and third party dependencies:
+TODO:
+~~The easiest way is to use [CocoaPods](http://cocoapods.org). It takes care of all required frameworks and third party dependencies:~~
 
 ```ruby
 pod 'Raven-swift'
