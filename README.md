@@ -42,17 +42,12 @@ The first `RavenClient` that is initialized is automatically configured as the s
 println("I am your RavenClient singleton : \(RavenClient.sharedClient())")
 ```
 
-//TODO: ### Sending messages
-
 ```swift
 // Sending a basic message (note, does not include a stacktrace):
-[[RavenClient sharedClient] captureMessage:@"TEST 1 2 3"];
+RavenClient.sharedClient().captureMessage("TEST 1 2 3")
 
 // Sending a message with another level and a stacktrace:
-[[RavenClient sharedClient] captureMessage:@"TEST 1 2 3" level:kRavenLogLevelDebugInfo method:__FUNCTION__ file:__FILE__ line:__LINE__];
-
-// Recommended macro to send a message with automatic stacktrace:
-RavenCaptureMessage(@"TEST %i %@ %f", 1, @"2", 3.0);
+RavenClient.sharedClient().captureMessage("TEST 1 2 3", level: .kRavenLogLevelDebugInfo, method: __FUNCTION__, file: __FILE__, line: __LINE__)
 ```
 
 ### Handling exceptions
