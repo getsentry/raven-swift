@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sendMessage() {
-        RavenClient.sharedClient()?.captureMessage("Raven message test")
+        RavenClient.sharedClient?.captureMessage("Raven message test")
     }
 
     

@@ -40,15 +40,15 @@ While you are free to initialize as many instances of `RavenClient` as is approp
 The first `RavenClient` that is initialized is automatically configured as the singleton instance and becomes available via the `sharedClient` singleton method:
 
 ```swift
-println("I am your RavenClient singleton : \(RavenClient.sharedClient())")
+println("I am your RavenClient singleton : \(RavenClient.sharedClient)")
 ```
 
 ```swift
 // Sending a basic message (note, does not include a stacktrace):
-RavenClient.sharedClient().captureMessage("TEST 1 2 3")
+RavenClient.sharedClient.captureMessage("TEST 1 2 3")
 
 // Sending a message with another level and a stacktrace:
-RavenClient.sharedClient().captureMessage("TEST 1 2 3", level: .kRavenLogLevelDebugInfo, method: __FUNCTION__, file: __FILE__, line: __LINE__)
+RavenClient.sharedClient.captureMessage("TEST 1 2 3", level: .kRavenLogLevelDebugInfo, method: __FUNCTION__, file: __FILE__, line: __LINE__)
 ```
 
 ### Handling exceptions
@@ -61,7 +61,7 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
     
     RavenClient.clientWithDSN("https://[public]:[secret]@[server]/[project id])
     
-    RavenClient.sharedClient()?.setupExceptionHandler()
+    RavenClient.sharedClient?.setupExceptionHandler()
 
     return true
 }
@@ -74,10 +74,10 @@ var error: NSError?
 NSFileManager.defaultManager().removeItemAtPath("some/path", error: &error)
 
 // Sending basic error 
-RavenClient.sharedClient()?.captureError(error!)
+RavenClient.sharedClient?.captureError(error!)
 
 // Sending error with method, file and line number 
-RavenClient.sharedClient()?.captureError(error!, method: __FUNCTION__, file: __FILE__, line: __LINE__)
+RavenClient.sharedClient?.captureError(error!, method: __FUNCTION__, file: __FILE__, line: __LINE__)
 ```
 
 *Note: when using the global exception handler, exceptions will be sent the __next__ time the app is started.*

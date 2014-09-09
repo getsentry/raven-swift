@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         RavenClient.clientWithDSN("https://30d629f2df9c4fdf8507e1704c09a526:f766cf8e0fff446986ac6daf1902e832@app.getsentry.com/888")
         
-        RavenClient.sharedClient()?.setupExceptionHandler()
+        RavenClient.sharedClient?.setupExceptionHandler()
 
         return true
     }

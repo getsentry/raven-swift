@@ -35,8 +35,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return dateFormatter
     }
-    
-    class func sharedClient() -> RavenClient? {
+    class var sharedClient : RavenClient? {
         return _RavenClientSharedInstance
     }
    
@@ -99,7 +98,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     }
     
     func exceptionHandler(exception: NSException) {
-        RavenClient.sharedClient()?.captureException(exception, sendNow: false)
+        RavenClient.sharedClient?.captureException(exception, sendNow: false)
     }
 
     func setDefaultTags() {
@@ -162,11 +161,11 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     }
     
     func captureError(error : NSError, method: String?, file: String?, line: Int){
-        RavenClient.sharedClient()?.captureMessage("\(error)", level: .kRavenLogLevelDebugError, method: method, file: file, line: line )
+        RavenClient.sharedClient?.captureMessage("\(error)", level: .kRavenLogLevelDebugError, method: method, file: file, line: line )
     }
     
     func captureError(error : NSError){
-        RavenClient.sharedClient()?.captureMessage("\(error)", level: .kRavenLogLevelDebugError, method: nil, file: nil, line: 0 )
+        RavenClient.sharedClient?.captureMessage("\(error)", level: .kRavenLogLevelDebugError, method: nil, file: nil, line: 0 )
     }
     
     func captureException(exception :NSException) {
