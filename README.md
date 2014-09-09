@@ -40,15 +40,15 @@ While you are free to initialize as many instances of `RavenClient` as is approp
 The first `RavenClient` that is initialized is automatically configured as the singleton instance and becomes available via the `sharedClient` singleton method:
 
 ```swift
-println("I am your RavenClient singleton : \(RavenClient.sharedClient)")
+println("I am your RavenClient singleton : \(RavenClient.sharedClient?)")
 ```
 
 ```swift
 // Sending a basic message (note, does not include a stacktrace):
-RavenClient.sharedClient.captureMessage("TEST 1 2 3")
+RavenClient.sharedClient?.captureMessage("TEST 1 2 3")
 
 // Sending a message with another level and a stacktrace:
-RavenClient.sharedClient.captureMessage("TEST 1 2 3", level: .kRavenLogLevelDebugInfo, method: __FUNCTION__, file: __FILE__, line: __LINE__)
+RavenClient.sharedClient?.captureMessage("TEST 1 2 3", level: .kRavenLogLevelDebugInfo, method: __FUNCTION__, file: __FILE__, line: __LINE__)
 ```
 
 ### Handling exceptions
