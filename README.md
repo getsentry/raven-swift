@@ -15,13 +15,15 @@ pod 'Raven-swift'
 **Alternatively**, you can install manually.
 
 1. Get the code: `git clone git://github.com/timorzadir/raven-swift`
-2. Drag the `Raven` subfolder to your project. Check both "copy items into destination group's folder" and your target.
+2. Drag the `RavenClient.swift` and `RavenConfig.swift` files to your project. Check both "copy items into destination group's folder" and your target.
+3. If you want to set up a global exception handler, drag the `UncaughtExceptionHandler.h` and `.m` files to your project. Check both "copy items into destination group's folder" and your target.
 
 Alternatively you can add this code as a Git submodule:
 
 1. `cd [your project root]`
 2. `git submodule add git://github.com/timorzadir/raven-swift`
-3. Drag the `Raven` subfolder to your project. Uncheck the "copy items into destination group's folder" box, do check your target.
+3. Drag the `RavenClient.swift` and `RavenConfig.swift` files to your project. Uncheck the "copy items into destination group's folder" box, do check your target.
+4. If you want to set up a global exception handler, drag the `UncaughtExceptionHandler.h` and `.m` files to your project. Check both "copy items into destination group's folder" and your target.
 
 
 ## How to get started
@@ -51,22 +53,6 @@ RavenClient.sharedClient?.captureMessage("TEST 1 2 3")
 RavenClient.sharedClient?.captureMessage("TEST 1 2 3", level: .kRavenLogLevelDebugInfo, method: __FUNCTION__, file: __FILE__, line: __LINE__)
 ```
 
-### Handling exceptions
-
-Setup a global exception handler:
-
-```swift
-func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
-    
-    RavenClient.clientWithDSN("https://[public]:[secret]@[server]/[project id])
-    
-    RavenClient.sharedClient?.setupExceptionHandler()
-
-    return true
-}
-```
-
 You can also capture errors:
 
 ```swift
@@ -78,6 +64,35 @@ RavenClient.sharedClient?.captureError(error!)
 
 // Sending error with method, file and line number 
 RavenClient.sharedClient?.captureError(error!, method: __FUNCTION__, file: __FILE__, line: __LINE__)
+```
+
+### Handling exceptions
+
+If you want a global exception handler, you will need to add this to your [bridging header](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html): 
+```objective-c
+#import "UncaughtExceptionHandler.h"
+```
+and in `UncaughtExceptionHandler.m` replace the 
+```objective-c
+#import "Raven-Swift.h"
+```
+with
+```objective-c
+#import "YourProductModuleName-Swift.h"
+```
+
+Then you can set up a global exception handler:
+
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    // Override point for customization after application launch.
+    
+    RavenClient.clientWithDSN("https://[public]:[secret]@[server]/[project id])
+    
+    RavenClient.sharedClient?.setupExceptionHandler()
+
+    return true
+}
 ```
 
 *Note: when using the global exception handler, exceptions will be sent the __next__ time the app is started.*
