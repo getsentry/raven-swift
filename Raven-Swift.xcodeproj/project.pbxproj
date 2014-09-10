@@ -33,7 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		650712C219BB16A500786DC4 /* Raven-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Raven-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
+		650712C219BB16A500786DC4 /* Raven-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Raven-Swift-Bridging-Header.h"; path = "../Raven/Raven-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		650712C319BB16A500786DC4 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
 		650712C419BB16A500786DC4 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
 		650712C619BB1E7B00786DC4 /* RavenClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RavenClient.swift; sourceTree = "<group>"; };
@@ -91,6 +91,7 @@
 		652C5DE419B7AA2C002CD4A9 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				650712C219BB16A500786DC4 /* Raven-Swift-Bridging-Header.h */,
 				650712CA19BB1E8700786DC4 /* AppDelegate.swift */,
 				650712CB19BB1E8700786DC4 /* ViewController.swift */,
 				652C5DEB19B7AA2D002CD4A9 /* Main.storyboard */,
@@ -134,7 +135,6 @@
 				650712C719BB1E7B00786DC4 /* RavenConfig.swift */,
 				650712C319BB16A500786DC4 /* UncaughtExceptionHandler.h */,
 				650712C419BB16A500786DC4 /* UncaughtExceptionHandler.m */,
-				650712C219BB16A500786DC4 /* Raven-Swift-Bridging-Header.h */,
 			);
 			path = Raven;
 			sourceTree = "<group>";
