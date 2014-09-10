@@ -16,8 +16,4 @@ void exceptionHandler(NSException *exception) {
 
 NSUncaughtExceptionHandler *exceptionHandlerPtr = &exceptionHandler;
 
-+ (void) raise: (NSString *)message{
-    [NSException raise:@"TestException" format:@"%@", message];
-}
-
 @end

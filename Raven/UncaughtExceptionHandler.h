@@ -12,6 +12,4 @@ extern NSUncaughtExceptionHandler *exceptionHandlerPtr;
 
 @interface UncaughtExceptionHandler : NSObject 
 
-+ (void) raise: (NSString *) messsage;
-
 @end
