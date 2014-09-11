@@ -87,7 +87,7 @@ Then you can set up a global exception handler:
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
     
-    RavenClient.clientWithDSN("https://[public]:[secret]@[server]/[project id])
+    RavenClient.clientWithDSN("https://[public]:[secret]@[server]/[project id]")
     
     RavenClient.sharedClient?.setupExceptionHandler()
 
