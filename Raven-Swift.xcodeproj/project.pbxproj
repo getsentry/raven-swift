@@ -373,6 +373,7 @@
 				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_MODULE_NAME = Raven;
 				PRODUCT_NAME = "Raven-Swift";
 				SWIFT_OBJC_BRIDGING_HEADER = "Raven/Raven-Swift-Bridging-Header.h";
