@@ -98,8 +98,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     }
 
     func setDefaultTags() {
-        let build: String? = tags["Build version"]
-        if (build == nil) {
+        if tags["Build version"] == nil {
             if let buildVersion: AnyObject = NSBundle.mainBundle().infoDictionary["CFBundleShortVersionString"]
             {
                 tags["Build version"] = buildVersion as? String
@@ -107,16 +106,12 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         }
         
         #if os(iOS)
-            var osVersion = tags["OS version"] as String?
-            if (osVersion == nil) {
-                osVersion = UIDevice.currentDevice().systemVersion
-                tags["OS version"] = osVersion
+            if (tags["OS version"] == nil) {
+                tags["OS version"] = UIDevice.currentDevice().systemVersion
             }
             
-            var deviceModel = tags["Device model"] as String?
-            if (deviceModel == nil) {
-                deviceModel = UIDevice.currentDevice().model
-                tags["Device model"] = deviceModel
+            if (tags["Device model"] == nil) {
+                tags["Device model"] = UIDevice.currentDevice().model
             }
         #endif
 
