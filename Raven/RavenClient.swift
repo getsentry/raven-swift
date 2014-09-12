@@ -74,6 +74,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         
         var client = RavenClient(config: config, extra: extra, tags: tags, logger: logger)
         client.setDefaultTags()
+        
         if (_RavenClientSharedInstance == nil) {
             _RavenClientSharedInstance = client
         }
@@ -94,10 +95,6 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     class func clientWithDSN(DSN: String) -> RavenClient?
     {
         return RavenClient.clientWithDSN(DSN, extra: [:])
-    }
-    
-    func exceptionHandler(exception: NSException) {
-        RavenClient.sharedClient?.captureException(exception, sendNow: false)
     }
 
     func setDefaultTags() {
