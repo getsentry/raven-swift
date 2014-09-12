@@ -233,7 +233,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         {
             if (!sendNow) {
                 // We can't send this exception to Sentry now, e.g. because the app is killed before the
-                // connection can be made. So, save it into NSUserDefaults.
+                // connection can be made. So, save the JSON payload into NSUserDefaults.
                 let JSONString = NSString(data: JSON, encoding: NSUTF8StringEncoding)
                 var reports : [AnyObject]? = NSUserDefaults.standardUserDefaults().arrayForKey(userDefaultsKey)
                 if (reports != nil) {
@@ -243,7 +243,6 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
                 }
                 NSUserDefaults.standardUserDefaults().setObject(reports, forKey:userDefaultsKey)
                 NSUserDefaults.standardUserDefaults().synchronize()
-                println(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())
             } else {
                 self.sendJSON(JSON)
             }
