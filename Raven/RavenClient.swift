@@ -27,7 +27,6 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     var tags : [String : String]
     let logger : String?
     internal let config : RavenConfig
-    private var receivedData : NSMutableData?
     private var dateFormatter : NSDateFormatter {
         var dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: "UTC")
@@ -273,11 +272,9 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     }
     
     func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
-        self.receivedData?.length = 0
-    }
-    
-    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
-        self.receivedData?.appendData(data)
+        #if DEBUG
+            println("Response from Sentry: \(response)")
+        #endif
     }
     
     func connectionDidFinishLoading(connection: NSURLConnection) {
@@ -355,7 +352,6 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         request.setValue("\(header)", forHTTPHeaderField:"X-Sentry-Auth")
         
         let connection = NSURLConnection(request: request, delegate: self)
-        self.receivedData = NSMutableData()
         
         #if DEBUG
         let debug = NSString(data: JSON!, encoding: NSUTF8StringEncoding)
