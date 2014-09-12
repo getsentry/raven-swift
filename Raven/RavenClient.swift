@@ -29,9 +29,8 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     internal let config : RavenConfig
     private var receivedData : NSMutableData?
     private var dateFormatter : NSDateFormatter {
-        let timeZone = NSTimeZone(name: "UTC")
         var dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = timeZone
+        dateFormatter.timeZone = NSTimeZone(name: "UTC")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return dateFormatter
     }
