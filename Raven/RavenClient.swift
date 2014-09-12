@@ -286,7 +286,6 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     }
     
     internal func sendDictionary(dict: [String: AnyObject]) {
-        var error : NSError? = nil;
         let JSON = self.encodeJSON(dict)
         self.sendJSON(JSON)
     }
