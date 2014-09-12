@@ -343,7 +343,9 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         
         let header = "Sentry sentry_version=\(sentryProtocol), sentry_client=\(sentryClient), sentry_timestamp=\(NSDate.timeIntervalSinceReferenceDate()), sentry_key=\(self.config.publicKey!), sentry_secret=\(self.config.secretKey!)"
         
+        #if DEBUG
         println(header)
+        #endif
         
         var request = NSMutableURLRequest(URL: self.config.serverUrl!)
         request.HTTPMethod = "POST"
@@ -355,7 +357,10 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         
         let connection = NSURLConnection(request: request, delegate: self)
         self.receivedData = NSMutableData()
+        
+        #if DEBUG
         let debug = NSString(data: JSON!, encoding: NSUTF8StringEncoding)
         println(debug)
+        #endif
     }
 }
