@@ -25,6 +25,7 @@ private var _RavenClientSharedInstance : RavenClient?
 class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate  {
     var extra : [String: AnyObject]
     var tags : [String : String]
+    var user : [String : String]?
     let logger : String?
     internal let config : RavenConfig
     private var dateFormatter : NSDateFormatter {
@@ -314,17 +315,18 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         }
         
         var returnDict : [String: AnyObject] = ["event_id" : self.generateUUID(),
-            "project" : self.config.projectId!,
+            "project"   : self.config.projectId!,
             "timestamp" : self.dateFormatter.stringFromDate(NSDate()),
-            "level" : level.toRaw(),
-            "platform": "swift",
-            "extra": extra,
-            "tags" : tags,
-            "logger" : self.logger ?? "",
-            "message" : message,
-            "culprit": culprit ?? "",
+            "level"     : level.toRaw(),
+            "platform"  : "swift",
+            "extra"     : extra,
+            "tags"      : tags,
+            "logger"    : self.logger ?? "",
+            "message"   : message,
+            "culprit"   : culprit ?? "",
             "stacktrace": stacktraceDict,
-            "exception" : exception]
+            "exception" : exception,
+            "user"      : user ?? ""]
         
         return returnDict
     }
