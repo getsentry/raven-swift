@@ -68,7 +68,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         var config = RavenConfig()
         if (!config.setDSN(DSN))
         {
-            println("Invalid DSN \(DSN)!")
+            println("Invalid DSN: \(DSN)!")
             return nil
         }
         
@@ -122,22 +122,12 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         self.captureMessage(message, level: RavenLogLevel.kRavenLogLevelDebugInfo)
     }
     
-    func captureMessage(message : String, level: RavenLogLevel)
-    {
-        self.captureMessage(message, level: level, method:nil, file:nil, line:0)
-        
-    }
-    
-    func captureMessage(message: String, level: RavenLogLevel, method: String?, file: String?, line: Int){
+    func captureMessage(message: String, level: RavenLogLevel, method: String? = __FUNCTION__ , file: String? = __FILE__, line: Int = __LINE__){
     
         self.captureMessage(message, level: level, additionalExtra:[:], additionalTags:[:], method:method, file:file, line:line)
     }
     
-    func captureMessage(message: String, level:RavenLogLevel, additionalExtra: [String: AnyObject], additionalTags:[String: String]) {
-        self.captureMessage(message,level: level, additionalExtra: additionalExtra, additionalTags: additionalTags, method:nil, file:nil, line:0)
-    }
-    
-    func captureMessage(message: String, level: RavenLogLevel, additionalExtra:[String: AnyObject], additionalTags: [String: String], method:String?, file:String?, line:Int) {
+    func captureMessage(message: String, level: RavenLogLevel, additionalExtra:[String: AnyObject], additionalTags: [String: String], method:String? = __FUNCTION__, file:String? = __FILE__, line:Int = __LINE__) {
         var stacktrace : [AnyObject] = []
         
         if (method != nil && file != nil && line > 0) {
@@ -151,20 +141,12 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         self.sendDictionary(data)
     }
     
-    func captureError(error : NSError, method: String?, file: String?, line: Int){
+    func captureError(error : NSError, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__){
         RavenClient.sharedClient?.captureMessage("\(error)", level: .kRavenLogLevelDebugError, method: method, file: file, line: line )
-    }
-    
-    func captureError(error : NSError){
-        RavenClient.sharedClient?.captureMessage("\(error)", level: .kRavenLogLevelDebugError, method: nil, file: nil, line: 0 )
     }
     
     func captureException(exception :NSException) {
         self.captureException(exception, sendNow:true)
-    }
-    
-    func captureException(exception: NSException, sendNow: Bool) {
-        self.captureException(exception, additionalExtra:[:], additionalTags:[:], sendNow:sendNow)
     }
     
     func captureException(exception:NSException, additionalExtra:[String: AnyObject], additionalTags: [String: String], sendNow:Bool) {
@@ -208,7 +190,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         
     }
     
-    func captureException(exception: NSException, method:String?, file:String?, line:Int, sendNow:Bool) {
+    func captureException(exception: NSException, method:String? = __FUNCTION__, file:String? = __FILE__, line:Int = __LINE__, sendNow:Bool = false) {
         let message = "\(exception.name): \(exception.reason!)"
         let exceptionDict = ["type": exception.name, "value": exception.reason? ?? ""]
         

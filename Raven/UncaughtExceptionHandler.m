@@ -14,7 +14,7 @@
 @implementation UncaughtExceptionHandler
 
 void exceptionHandler(NSException *exception) {
-    [[RavenClient sharedClient] captureException:exception sendNow:NO];
+    [[RavenClient sharedClient] captureException:exception];
 }
 
 NSUncaughtExceptionHandler *exceptionHandlerPtr = &exceptionHandler;
