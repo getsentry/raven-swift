@@ -5,15 +5,6 @@ Swift client for [Sentry](https://www.getsentry.com/welcome/).
 
 ## Installation
 
-TODO:
-~~The easiest way is to use [CocoaPods](http://cocoapods.org). It takes care of all required frameworks and third party dependencies:~~
-
-```ruby
-pod 'raven-swift'
-```
-
-**Alternatively**, you can install manually.
-
 1. Get the code: `git clone git://github.com/getsentry/raven-swift`
 2. Drag the `RavenClient.swift` and `RavenConfig.swift` files to your project. Check both "copy items into destination group's folder" and your target.
 3. If you want to set up a global exception handler, drag the `UncaughtExceptionHandler.h` and `.m` files to your project. Check both "copy items into destination group's folder" and your target.
@@ -72,18 +63,13 @@ If you want a global exception handler, you will need to add this to your [bridg
 ```objective-c
 #import "UncaughtExceptionHandler.h"
 ```
-and in `UncaughtExceptionHandler.m` replace and uncomment the 
+and in `UncaughtExceptionHandler.m` replace the 
 ```objective-c
-//#import "Raven-Swift.h"
+#import "Raven-Swift.h"
 ```
 with
 ```objective-c
 #import "YourProductModuleName-Swift.h"
-```
-
-and uncomment 
-```objective-c
-//[[RavenClient sharedClient] captureException:exception];
 ```
 
 Then you can set up a global exception handler:
