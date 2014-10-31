@@ -9,7 +9,7 @@ TODO:
 ~~The easiest way is to use [CocoaPods](http://cocoapods.org). It takes care of all required frameworks and third party dependencies:~~
 
 ```ruby
-pod 'Raven-swift'
+pod 'raven-swift'
 ```
 
 **Alternatively**, you can install manually.
