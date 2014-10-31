@@ -99,7 +99,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
 
     func setDefaultTags() {
         if tags["Build version"] == nil {
-            if let buildVersion: AnyObject = NSBundle.mainBundle().infoDictionary["CFBundleShortVersionString"]
+            if let buildVersion: AnyObject = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"]
             {
                 tags["Build version"] = buildVersion as? String
             }
@@ -175,9 +175,9 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
                 let JSONString = NSString(data: JSON, encoding: NSUTF8StringEncoding)
                 var reports = NSUserDefaults.standardUserDefaults().objectForKey(userDefaultsKey) as? [AnyObject]
                 if (reports != nil) {
-                    reports!.append(JSONString)
+                    reports!.append(JSONString!)
                 } else {
-                    reports = [JSONString]
+                    reports = [JSONString!]
                 }
                 
                 NSUserDefaults.standardUserDefaults().setObject(reports, forKey:userDefaultsKey)
@@ -219,9 +219,9 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
                 let JSONString = NSString(data: JSON, encoding: NSUTF8StringEncoding)
                 var reports : [AnyObject]? = NSUserDefaults.standardUserDefaults().arrayForKey(userDefaultsKey)
                 if (reports != nil) {
-                    reports!.append(JSONString)
+                    reports!.append(JSONString!)
                 } else {
-                    reports = [JSONString]
+                    reports = [JSONString!]
                 }
                 NSUserDefaults.standardUserDefaults().setObject(reports, forKey:userDefaultsKey)
                 NSUserDefaults.standardUserDefaults().synchronize()
@@ -270,7 +270,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     }
     
     internal func generateUUID() -> String {
-        let uuid = NSUUID.UUID().UUIDString
+        let uuid = NSUUID().UUIDString
         let res = uuid.stringByReplacingOccurrencesOfString("-", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         return res
     }
@@ -299,7 +299,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         var returnDict : [String: AnyObject] = ["event_id" : self.generateUUID(),
             "project"   : self.config.projectId!,
             "timestamp" : self.dateFormatter.stringFromDate(NSDate()),
-            "level"     : level.toRaw(),
+            "level"     : level.rawValue,
             "platform"  : "swift",
             "extra"     : extra,
             "tags"      : tags,

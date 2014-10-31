@@ -17,11 +17,11 @@ class RavenConfig {
     
     func setDSN(DSN : String) -> Bool {
         let DSNURL = NSURL(string: DSN)
-        if DSNURL.host == nil{
+        if DSNURL?.host == nil{
             return false
         }
         
-        var pathComponents = DSNURL.pathComponents as [String]
+        var pathComponents = DSNURL!.pathComponents as [String]
         
         if (pathComponents.count == 0)
         {
@@ -46,20 +46,20 @@ class RavenConfig {
             path += "/"
         }
         
-        var scheme: String = DSNURL.scheme ?? "http"
+        var scheme: String = DSNURL!.scheme ?? "http"
         
-        var port = DSNURL.port
+        var port = DSNURL!.port
         if (port == nil) {
-            if (DSNURL.scheme == "https") {
+            if (DSNURL!.scheme == "https") {
                 port = 443;
             } else {
                 port = 80;
             }
         }
         
-        serverUrl = NSURL(string:"\(scheme)://\(DSNURL.host!):\(port!)\(path)/api/\(projectId!)/store/")
-        publicKey = DSNURL.user
-        secretKey = DSNURL.password
+        serverUrl = NSURL(string:"\(scheme)://\(DSNURL!.host!):\(port!)\(path)/api/\(projectId!)/store/")
+        publicKey = DSNURL!.user
+        secretKey = DSNURL!.password
     
         return true
     }
