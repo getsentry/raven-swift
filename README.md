@@ -72,13 +72,18 @@ If you want a global exception handler, you will need to add this to your [bridg
 ```objective-c
 #import "UncaughtExceptionHandler.h"
 ```
-and in `UncaughtExceptionHandler.m` replace the 
+and in `UncaughtExceptionHandler.m` replace and uncomment the 
 ```objective-c
-#import "Raven-Swift.h"
+//#import "Raven-Swift.h"
 ```
 with
 ```objective-c
 #import "YourProductModuleName-Swift.h"
+```
+
+and uncomment 
+```objective-c
+//[[RavenClient sharedClient] captureException:exception];
 ```
 
 Then you can set up a global exception handler:
