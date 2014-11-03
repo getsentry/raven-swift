@@ -44,6 +44,9 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         self.extra = extra
         self.tags = tags
         self.logger = logger
+        
+        super.init()
+        setDefaultTags()
     }
     
     convenience init(config: RavenConfig, extra: [String: AnyObject], tags: [String: String])
@@ -73,7 +76,6 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         }
         
         var client = RavenClient(config: config!, extra: extra, tags: tags, logger: logger)
-        client.setDefaultTags()
         
         if (_RavenClientSharedInstance == nil) {
             _RavenClientSharedInstance = client
@@ -95,26 +97,6 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     class func clientWithDSN(DSN: String) -> RavenClient?
     {
         return RavenClient.clientWithDSN(DSN, extra: [:])
-    }
-
-    func setDefaultTags() {
-        if tags["Build version"] == nil {
-            if let buildVersion: AnyObject = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"]
-            {
-                tags["Build version"] = buildVersion as? String
-            }
-        }
-        
-        #if os(iOS)
-            if (tags["OS version"] == nil) {
-                tags["OS version"] = UIDevice.currentDevice().systemVersion
-            }
-            
-            if (tags["Device model"] == nil) {
-                tags["Device model"] = UIDevice.currentDevice().model
-            }
-        #endif
-
     }
 
     func captureMessage(message : String)
@@ -262,6 +244,26 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     
     func connectionDidFinishLoading(connection: NSURLConnection) {
         println("JSON sent to Sentry")
+    }
+    
+    internal func setDefaultTags() {
+        if tags["Build version"] == nil {
+            if let buildVersion: AnyObject = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"]
+            {
+                tags["Build version"] = buildVersion as? String
+            }
+        }
+        
+        #if os(iOS)
+            if (tags["OS version"] == nil) {
+                tags["OS version"] = UIDevice.currentDevice().systemVersion
+            }
+            
+            if (tags["Device model"] == nil) {
+                tags["Device model"] = UIDevice.currentDevice().model
+            }
+        #endif
+        
     }
     
     internal func sendDictionary(dict: [String: AnyObject]) {

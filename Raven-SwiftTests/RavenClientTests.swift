@@ -148,9 +148,6 @@ class RavenClientTests: XCTestCase {
     func testClientWithExtraAndTags()
     {
         var clientWithExtraAndTags = MockRavenClient(config: config!, extra: ["key" : "value"], tags: ["key" : "value"], logger: nil)
-
-        //TODO: This is performed in clientWithDSN. Figure out how to use this factory method for initializing. [timor]
-        clientWithExtraAndTags.setDefaultTags()
         
         clientWithExtraAndTags.captureMessage("An example message",level:.kRavenLogLevelDebugWarning, additionalExtra:["key2" : "extra value"], additionalTags:["key2" : "tag value"])
         
