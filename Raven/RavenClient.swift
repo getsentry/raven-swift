@@ -65,14 +65,14 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
 
     class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: String], logger: String?) -> RavenClient?
     {
-        var config = RavenConfig()
-        if (!config.setDSN(DSN))
+        let config = RavenConfig(DSN: DSN)
+        if (config == nil)
         {
             println("Invalid DSN: \(DSN)!")
             return nil
         }
         
-        var client = RavenClient(config: config, extra: extra, tags: tags, logger: logger)
+        var client = RavenClient(config: config!, extra: extra, tags: tags, logger: logger)
         client.setDefaultTags()
         
         if (_RavenClientSharedInstance == nil) {

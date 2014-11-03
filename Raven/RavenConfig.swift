@@ -13,12 +13,10 @@ class RavenConfig {
     var secretKey : String?
     var projectId : String?
     
-    init() {}
-    
-    func setDSN(DSN : String) -> Bool {
+    init? (DSN : String) {
         let DSNURL = NSURL(string: DSN)
         if DSNURL?.host == nil{
-            return false
+            return nil
         }
         
         var pathComponents = DSNURL!.pathComponents as [String]
@@ -26,7 +24,7 @@ class RavenConfig {
         if (pathComponents.count == 0)
         {
             println("Missing path")
-            return false
+            return nil
         }
         
         pathComponents.removeAtIndex(0) // always remove the first slash
@@ -34,7 +32,7 @@ class RavenConfig {
         projectId = pathComponents.last // project id is the last element of the path
         
         if projectId == nil{
-            return false
+            return nil
         }
         
         pathComponents.removeLast() // remove the project id...
@@ -60,7 +58,5 @@ class RavenConfig {
         serverUrl = NSURL(string:"\(scheme)://\(DSNURL!.host!):\(port!)\(path)/api/\(projectId!)/store/")
         publicKey = DSNURL!.user
         secretKey = DSNURL!.password
-    
-        return true
     }
 }
