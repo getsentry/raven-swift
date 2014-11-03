@@ -323,13 +323,13 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     private func sendJSON(JSON: NSData?)
     {
         
-        let header = "Sentry sentry_version=\(sentryProtocol), sentry_client=\(sentryClient), sentry_timestamp=\(NSDate.timeIntervalSinceReferenceDate()), sentry_key=\(self.config.publicKey!), sentry_secret=\(self.config.secretKey!)"
+        let header = "Sentry sentry_version=\(sentryProtocol), sentry_client=\(sentryClient), sentry_timestamp=\(NSDate.timeIntervalSinceReferenceDate()), sentry_key=\(self.config.publicKey), sentry_secret=\(self.config.secretKey)"
         
         #if DEBUG
         println(header)
         #endif
         
-        var request = NSMutableURLRequest(URL: self.config.serverUrl!)
+        var request = NSMutableURLRequest(URL: self.config.serverUrl)
         request.HTTPMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

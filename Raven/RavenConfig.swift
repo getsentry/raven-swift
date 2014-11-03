@@ -8,10 +8,10 @@
 import Foundation
 
 class RavenConfig {
-    var serverUrl : NSURL?
-    var publicKey : String?
-    var secretKey : String?
-    var projectId : String?
+    let serverUrl : NSURL!
+    let publicKey : String!
+    let secretKey : String!
+    let projectId : String!
     
     init? (DSN : String) {
         let DSNURL = NSURL(string: DSN)
