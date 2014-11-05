@@ -111,13 +111,16 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     
     func captureMessage(message: String, level: RavenLogLevel, additionalExtra:[String: AnyObject], additionalTags: [String: String], method:String? = __FUNCTION__, file:String? = __FILE__, line:Int = __LINE__) {
         var stacktrace : [AnyObject] = []
+        var culprit : String = ""
         
         if (method != nil && file != nil && line > 0) {
-            let frame = ["filename" : file!.lastPathComponent, "function" : method!, "lineno" : line]
+            let filename = file!.lastPathComponent;
+            let frame = ["filename" : filename, "function" : method!, "lineno" : line]
             stacktrace = [frame]
+            culprit = "\(method!) in \(filename)"
         }
         
-        let data = self.prepareDictionaryForMessage(message, level:level, additionalExtra:additionalExtra, additionalTags:additionalTags, culprit:file ?? "", stacktrace:stacktrace, exception:[:])
+        let data = self.prepareDictionaryForMessage(message, level:level, additionalExtra:additionalExtra, additionalTags:additionalTags, culprit:culprit, stacktrace:stacktrace, exception:[:])
         
         self.sendDictionary(data)
     }
