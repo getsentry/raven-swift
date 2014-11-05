@@ -75,7 +75,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
             return nil
         }
         
-        var client = RavenClient(config: config!, extra: extra, tags: tags, logger: logger)
+        let client = RavenClient(config: config!, extra: extra, tags: tags, logger: logger)
         
         if (_RavenClientSharedInstance == nil) {
             _RavenClientSharedInstance = client
@@ -113,8 +113,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
         var stacktrace : [AnyObject] = []
         
         if (method != nil && file != nil && line > 0) {
-            var frame = [String: NSObject]()
-            frame = ["filename" : file!.lastPathComponent, "function" : method!, "lineno" : line]
+            let frame = ["filename" : file!.lastPathComponent, "function" : method!, "lineno" : line]
             stacktrace = [frame]
         }
         
@@ -298,7 +297,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
             tags[entry.0] = entry.1
         }
         
-        var returnDict : [String: AnyObject] = ["event_id" : self.generateUUID(),
+        let returnDict : [String: AnyObject] = ["event_id" : self.generateUUID(),
             "project"   : self.config.projectId!,
             "timestamp" : self.dateFormatter.stringFromDate(NSDate()),
             "level"     : level.rawValue,
