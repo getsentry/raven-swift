@@ -163,7 +163,6 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
                 
                 NSUserDefaults.standardUserDefaults().setObject(reports, forKey:userDefaultsKey)
                 NSUserDefaults.standardUserDefaults().synchronize()
-                println(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())
             } else {
                 self.sendJSON(JSON)
             }
