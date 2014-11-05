@@ -231,7 +231,7 @@ class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelega
     }
 
     func connection(connection: NSURLConnection, didFailWithError error: NSError) {
-        let userInfo: [String: AnyObject] = error.userInfo as [String: AnyObject]
+        let userInfo = error.userInfo as [String: AnyObject]
         let errorKey: AnyObject? = userInfo[NSURLErrorFailingURLStringErrorKey]
         println("Connection failed! Error - \(error.localizedDescription) \(errorKey!)")
     }
