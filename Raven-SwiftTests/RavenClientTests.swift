@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Sentry
 
 let testDSN = "http://public:secret@example.com/foo"
 
@@ -32,7 +33,7 @@ class RavenClientTests: XCTestCase {
     func testGenerateUUID()
     {
         let uuid = client!.generateUUID()
-        XCTAssert(countElements(uuid) == 32 , "Invalid value for UUID returned: \(uuid)")
+        XCTAssert(count(uuid) == 32 , "Invalid value for UUID returned: \(uuid)")
     }
     
     func testCaptureMessageWithOnlyMessage()
