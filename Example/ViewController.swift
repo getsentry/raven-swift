@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Raven
 
 class ViewController: UIViewController {
                             

@@ -7,34 +7,21 @@
 
 import Foundation
 
-class RavenConfig {
+public class RavenConfig {
     let serverUrl : NSURL!
     let publicKey : String!
     let secretKey : String!
     let projectId : String!
     
-    init? (DSN : String) {
+    public init? (DSN : String) {
         let DSNURL = NSURL(string: DSN)
-        if DSNURL?.host == nil{
-            return nil
-        }
-        
-        var pathComponents = DSNURL!.pathComponents as [String]
-        
-        if (pathComponents.count == 0)
-        {
-            println("Missing path")
-            return nil
-        }
-        
+      
+        var pathComponents = DSNURL!.pathComponents as! [String]
+      
         pathComponents.removeAtIndex(0) // always remove the first slash
         
         projectId = pathComponents.last // project id is the last element of the path
-        
-        if projectId == nil{
-            return nil
-        }
-        
+
         pathComponents.removeLast() // remove the project id...
        
         var path = "/".join(pathComponents)  // ...and construct the path again
@@ -54,9 +41,22 @@ class RavenConfig {
                 port = 80;
             }
         }
-        
-        serverUrl = NSURL(string:"\(scheme)://\(DSNURL!.host!):\(port!)\(path)/api/\(projectId!)/store/")
+      
+        serverUrl = NSURL(string:"\(scheme)://\(DSNURL!.host!):\(port!)\(path)/api/\(projectId)/store/")
         publicKey = DSNURL!.user
         secretKey = DSNURL!.password
+      
+      
+      if DSNURL?.host == nil{
+        return nil
+      }
+      if (pathComponents.count == 0)
+      {
+        println("Missing path")
+        return nil
+      }
+      if projectId == nil{
+        return nil
+      }
     }
 }

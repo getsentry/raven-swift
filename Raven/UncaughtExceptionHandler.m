@@ -9,7 +9,7 @@
 
 //NOTE: Change this to YourProductModuleName-Swift.h
 //Ref: https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html
-#import "Raven-Swift.h"
+#import "Raven/Raven-Swift.h"
 
 @implementation UncaughtExceptionHandler
 

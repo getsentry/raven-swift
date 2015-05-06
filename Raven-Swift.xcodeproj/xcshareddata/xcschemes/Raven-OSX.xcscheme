@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0600"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "652C5DE119B7AA2C002CD4A9"
-               BuildableName = "Raven-Swift.app"
-               BlueprintName = "Raven-Swift"
+               BlueprintIdentifier = "030E0E4F1A89D32200E5E6BE"
+               BuildableName = "Raven.framework"
+               BlueprintName = "Raven-OSX"
                ReferencedContainer = "container:Raven-Swift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,26 +28,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "652C5DF319B7AA2D002CD4A9"
-               BuildableName = "RavenSwiftTests.xctest"
-               BlueprintName = "Raven-SwiftTests"
-               ReferencedContainer = "container:Raven-Swift.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "652C5DE119B7AA2C002CD4A9"
-            BuildableName = "Raven-Swift.app"
-            BlueprintName = "Raven-Swift"
-            ReferencedContainer = "container:Raven-Swift.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -58,15 +39,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "652C5DE119B7AA2C002CD4A9"
-            BuildableName = "Raven-Swift.app"
-            BlueprintName = "Raven-Swift"
+            BlueprintIdentifier = "030E0E4F1A89D32200E5E6BE"
+            BuildableName = "Raven.framework"
+            BlueprintName = "Raven-OSX"
             ReferencedContainer = "container:Raven-Swift.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -76,15 +57,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "652C5DE119B7AA2C002CD4A9"
-            BuildableName = "Raven-Swift.app"
-            BlueprintName = "Raven-Swift"
+            BlueprintIdentifier = "030E0E4F1A89D32200E5E6BE"
+            BuildableName = "Raven.framework"
+            BlueprintName = "Raven-OSX"
             ReferencedContainer = "container:Raven-Swift.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
