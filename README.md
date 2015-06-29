@@ -67,19 +67,12 @@ RavenClient.sharedClient?.captureError(error!)
 RavenClient.sharedClient?.captureError(error!, method: __FUNCTION__, file: __FILE__, line: __LINE__)
 ```
 
-### Handling exceptions
+## Handling exceptions
 
 If you want a global exception handler, you will need to add this to your [bridging header](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html): 
+
 ```objective-c
 #import "UncaughtExceptionHandler.h"
-```
-and in `UncaughtExceptionHandler.m` replace the 
-```objective-c
-#import "Raven-Swift.h"
-```
-with
-```objective-c
-#import "YourProductModuleName-Swift.h"
 ```
 
 Then you can set up a global exception handler:
