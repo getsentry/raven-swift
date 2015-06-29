@@ -136,8 +136,11 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         self.captureException(exception, sendNow:true)
     }
     
+    public func captureUncaughtException(exception: NSException) {
+        self.captureException(exception, sendNow: false)
+    }
+    
     public func captureException(exception:NSException, additionalExtra:[String: AnyObject], additionalTags: [String: String], sendNow:Bool) {
-        
         let message = "\(exception.name): \(exception.reason!)"
         let exceptionDict = ["type": exception.name, "value": exception.reason!]
         
@@ -218,7 +221,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     }
 
     public func setupExceptionHandler() {
-    
+        UncaughtExceptionHandler.registerHandler(self)
         NSSetUncaughtExceptionHandler(exceptionHandlerPtr)
         
         // Process saved crash reports

@@ -9,7 +9,10 @@
 
 void exceptionHandler(NSException *exception);
 extern NSUncaughtExceptionHandler *exceptionHandlerPtr;
+id ravenClient;
 
-@interface UncaughtExceptionHandler : NSObject 
+@interface UncaughtExceptionHandler : NSObject
+
++ (void)registerHandler: (id)raven;
 
 @end
