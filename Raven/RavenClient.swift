@@ -30,7 +30,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     public var extra: [String: AnyObject]
     public var tags: [String: String]
     public var user: [String: String]?
-    public let logger: RavenLogLevel?
+    public let logger: String?
     
     internal let config: RavenConfig
     
@@ -59,9 +59,9 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     :param: config  RavenConfig object
     :param: extra  extra data that will be sent with logs
     :param: tags  extra tags that will be added to logs
-    :param: logger  log level
+    :param: logger  Name of the logger
     */
-    public init(config: RavenConfig, extra: [String : AnyObject], tags: [String: String], logger: RavenLogLevel?) {
+    public init(config: RavenConfig, extra: [String : AnyObject], tags: [String: String], logger: String?) {
         self.config = config
         self.extra = extra
         self.tags = tags
@@ -110,11 +110,11 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     
     :param: extra  extra data that will be sent with logs
     :param: tags  extra tags that will be added to logs
-    :param: logger  log level
+    :param: logger  Name of the logger
     
     :returns: The RavenClient instance
     */
-    public class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: String], logger: RavenLogLevel?) -> RavenClient? {
+    public class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: String], logger: String?) -> RavenClient? {
         if let config = RavenConfig(DSN: DSN) {
             let client = RavenClient(config: config, extra: extra, tags: tags, logger: logger)
             
@@ -439,7 +439,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             "platform"  : "swift",
             "extra"     : extra,
             "tags"      : tags,
-            "logger"    : self.logger?.rawValue ?? "",
+            "logger"    : self.logger ?? "",
             "message"   : message,
             "culprit"   : culprit ?? "",
             "stacktrace": stacktraceDict,
