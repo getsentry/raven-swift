@@ -7,16 +7,20 @@
 
 #import "UncaughtExceptionHandler.h"
 
-//NOTE: Change this to YourProductModuleName-Swift.h
-//Ref: https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html
-#import "Raven/Raven-Swift.h"
 
 @implementation UncaughtExceptionHandler
 
 void exceptionHandler(NSException *exception) {
-    [[RavenClient sharedClient] captureException:exception];
+    SEL captureException = NSSelectorFromString(@"captureUncaughtException:");
+    if ([ravenClient respondsToSelector:captureException]) {
+        ((void (*)(id, SEL, NSException*))[ravenClient methodForSelector:captureException])(ravenClient, captureException, exception);
+    }
 }
 
 NSUncaughtExceptionHandler *exceptionHandlerPtr = &exceptionHandler;
+
++ (void)registerHandler: (id)raven {
+    ravenClient = raven;
+}
 
 @end
