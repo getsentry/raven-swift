@@ -16,32 +16,35 @@ let sentryProtocol = "4"
 let sentryClient = "raven-swift/0.1.0"
 
 public enum RavenLogLevel: String {
-    case kRavenLogLevelDebug = "debug"
-    case kRavenLogLevelDebugInfo = "info"
-    case kRavenLogLevelDebugWarning = "warning"
-    case kRavenLogLevelDebugError = "error"
-    case kRavenLogLevelDebugFatal = "fatal"
+    case Debug = "debug"
+    case Info = "info"
+    case Warning = "warning"
+    case Error = "error"
+    case Fatal = "fatal"
 }
 
 private var _RavenClientSharedInstance : RavenClient?
 
 public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate  {
-    public var extra : [String: AnyObject]
-    public var tags : [String : String]
-    public var user : [String : String]?
-    public let logger : String?
-    internal let config : RavenConfig
+    public var extra: [String: AnyObject]
+    public var tags: [String: String]
+    public var user: [String: String]?
+    public let logger: RavenLogLevel?
+    
+    internal let config: RavenConfig
+    
     private var dateFormatter : NSDateFormatter {
         var dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: "UTC")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return dateFormatter
     }
-    public class var sharedClient : RavenClient? {
+    
+    public class var sharedClient: RavenClient? {
         return _RavenClientSharedInstance
     }
    
-    public init(config: RavenConfig, extra: [String : AnyObject], tags: [String: String], logger : String?)
+    public init(config: RavenConfig, extra: [String : AnyObject], tags: [String: String], logger: RavenLogLevel?)
     {
         self.config = config
         self.extra = extra
@@ -69,7 +72,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         self.init(config: config, extra: [:], tags: [:], logger: nil)
     }
 
-    public class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: String], logger: String?) -> RavenClient?
+    public class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: String], logger: RavenLogLevel?) -> RavenClient?
     {
         let config = RavenConfig(DSN: DSN)
         if (config == nil)
@@ -104,7 +107,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
 
     public func captureMessage(message : String)
     {
-        self.captureMessage(message, level: RavenLogLevel.kRavenLogLevelDebugInfo)
+        self.captureMessage(message, level: .Info)
     }
     
     public func captureMessage(message: String, level: RavenLogLevel, method: String? = __FUNCTION__ , file: String? = __FILE__, line: Int = __LINE__){
@@ -129,7 +132,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     }
     
     public func captureError(error : NSError, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__){
-        RavenClient.sharedClient?.captureMessage("\(error)", level: .kRavenLogLevelDebugError, method: method, file: file, line: line )
+        RavenClient.sharedClient?.captureMessage("\(error)", level: .Error, method: method, file: file, line: line )
     }
     
     public func captureException(exception :NSException) {
@@ -156,7 +159,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             }
         }
         
-        let data = self.prepareDictionaryForMessage(message, level: .kRavenLogLevelDebugFatal, additionalExtra: additionalExtra, additionalTags: additionalTags, culprit: nil, stacktrace: stacktrace, exception: exceptionDict)
+        let data = self.prepareDictionaryForMessage(message, level: .Fatal, additionalExtra: additionalExtra, additionalTags: additionalTags, culprit: nil, stacktrace: stacktrace, exception: exceptionDict)
         if let JSON = self.encodeJSON(data)
         {
             if (!sendNow) {
@@ -198,7 +201,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             stacktrace.append(["function": call as! String])
         }
         
-        let data = self.prepareDictionaryForMessage(message, level: .kRavenLogLevelDebugFatal, additionalExtra: [:], additionalTags: [:], culprit: nil, stacktrace: stacktrace, exception: exceptionDict)
+        let data = self.prepareDictionaryForMessage(message, level: .Fatal, additionalExtra: [:], additionalTags: [:], culprit: nil, stacktrace: stacktrace, exception: exceptionDict)
         
         if let JSON = self.encodeJSON(data)
         {
@@ -312,7 +315,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             "platform"  : "swift",
             "extra"     : extra,
             "tags"      : tags,
-            "logger"    : self.logger ?? "",
+            "logger"    : self.logger?.rawValue ?? "",
             "message"   : message,
             "culprit"   : culprit ?? "",
             "stacktrace": stacktraceDict,
