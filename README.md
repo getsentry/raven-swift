@@ -5,13 +5,13 @@ Swift client for [Sentry](https://www.getsentry.com/welcome/).
 
 ## Installation
 
-The easiest way is to use [CocoaPods](http://cocoapods.org) (NOTE: currently in beta). It takes care of all required frameworks and third party dependencies:
+The easiest way is to use [CocoaPods](http://cocoapods.org). It takes care of all of the setup, required frameworks and third party dependencies:
 
 Steps
 
-1. Install Cocoapods beta: ```ruby gem install cocoapods -pre```
-2. Add raven swift to podfile: ```ruby pod 'raven-swift', :git => 'https://github.com/getsentry/raven-swift.git', :tag => '0.1.0'```
-3. Install pods: ```ruby pod install```
+1. [Install Cocoapods](http://cocoapods.org)
+2. Add raven swift to podfile: ```pod 'RavenSwift'```
+3. Install: ```pod install```
 
 **Alternatively**, you can install manually.
 
@@ -28,6 +28,8 @@ Alternatively you can add this code as a Git submodule:
 
 
 ## How to get started
+
+*Note: If you are using cocoapods, import ```RavenSwift``` any where the raven client is used*
 
 While you are free to initialize as many instances of `RavenClient` as is appropriate for your application, there is a shared singleton instance that is globally available. This singleton instance is often configured in your app delegate's `application:didFinishLaunchingWithOptions:` method:
 
@@ -69,7 +71,7 @@ RavenClient.sharedClient?.captureError(error!, method: __FUNCTION__, file: __FIL
 
 ## Handling exceptions
 
-If you want a global exception handler, you will need to add this to your [bridging header](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html): 
+If you want a global exception handler, you will need to add this to your [bridging header](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html). This step is only required if it is manually installed. Cocoapods will handle this for you: 
 
 ```objective-c
 #import "UncaughtExceptionHandler.h"
