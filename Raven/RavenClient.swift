@@ -174,8 +174,8 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     
     :param: message  The message to be logged
     */
-    public func captureMessage(message : String) {
-        self.captureMessage(message, level: .Info)
+    public func captureMessage(message : String, method: String? = __FUNCTION__ , file: String? = __FILE__, line: Int = __LINE__) {
+        self.captureMessage(message, level: .Info, additionalExtra:[:], additionalTags:[:], method:method, file:file, line:line)
     }
     
     
