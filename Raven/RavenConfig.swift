@@ -15,7 +15,7 @@ public class RavenConfig {
     
     public init? (DSN : String) {
         if let DSNURL = NSURL(string: DSN), host = DSNURL.host {
-            var pathComponents = DSNURL.pathComponents as! [String]
+            var pathComponents = DSNURL.pathComponents!
             
             pathComponents.removeAtIndex(0) // always remove the first slash
             
@@ -31,7 +31,7 @@ public class RavenConfig {
                     path += "/"
                 }
                 
-                var scheme: String = DSNURL.scheme ?? "http"
+                let scheme: String = DSNURL.scheme ?? "http"
                 
                 var port = DSNURL.port
                 if (port == nil) {
