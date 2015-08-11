@@ -6,14 +6,13 @@
 //
 
 import XCTest
-import Sentry
 
 let testDSN = "http://public:secret@example.com/foo"
 
 class MockRavenClient : RavenClient {
-    var lastEvent : [String: AnyObject] = [:]
-    var numEvents : Int = 0
-
+    var lastEvent: [String: AnyObject] = [:]
+    var numEvents = 0
+    
     override func sendDictionary(dict: [String : AnyObject]) {
         lastEvent = dict
         numEvents++
@@ -22,193 +21,349 @@ class MockRavenClient : RavenClient {
 
 
 class RavenClientTests: XCTestCase {
-
-    var client : MockRavenClient?
+    
+    var client: MockRavenClient?
     var config = RavenConfig(DSN: testDSN)
     
     override func setUp() {
-        client =  MockRavenClient(config: config!, extra: [:], tags: [:], logger: nil)
-        
+        client = MockRavenClient(config: config!, extra: [:], tags: [:], logger: nil)
     }
-    func testGenerateUUID()
-    {
+    
+    
+    func testGenerateUUID() {
         let uuid = client!.generateUUID()
         XCTAssert(count(uuid) == 32 , "Invalid value for UUID returned: \(uuid)")
     }
     
-    func testCaptureMessageWithOnlyMessage()
-    {
-        self.client!.captureMessage("An example message")
-        var lastEvent = self.client!.lastEvent
-        
-        XCTAssertNotNil(lastEvent["event_id"], "Missing event_id")
-        XCTAssertNotNil(lastEvent["message"], "Missing message")
-        XCTAssertNotNil(lastEvent["project"], "Missing project")
-        XCTAssertNotNil(lastEvent["level"], "Missing level")
-        XCTAssertNotNil(lastEvent["timestamp"], "Missing timestamp")
-       
-        let message: AnyObject! = lastEvent["message"]
-        XCTAssertEqual(message as String, "An example message", "Invalid value for message: \(message)")
-        
-        let project: AnyObject! = lastEvent["project"]
-        XCTAssertEqual(project as String, self.client!.config.projectId!, "Invalid value for project: \(project)")
-        
-        let level: AnyObject! = lastEvent["level"]
-        XCTAssertEqual(level as String, "info", "Invalid value for level: \(level) ")
+    func testCaptureMessageWithOnlyMessage() {
+        if let client = client {
+            
+            let testMessage = "An example message"
+            client.captureMessage(testMessage)
+            let lastEvent = client.lastEvent
+            
+            XCTAssertNotNil(lastEvent["event_id"], "Missing event_id")
+            XCTAssertNotNil(lastEvent["message"], "Missing message")
+            XCTAssertNotNil(lastEvent["project"], "Missing project")
+            XCTAssertNotNil(lastEvent["level"], "Missing level")
+            XCTAssertNotNil(lastEvent["timestamp"], "Missing timestamp")
+            XCTAssertNotNil(lastEvent["platform"], "Missing platform")
+            
+            if let message = lastEvent["message"] as? String {
+                XCTAssertEqual(message, testMessage, "Invalid value for message: \(message)")
+            }
+            else {
+                XCTFail("The message was not a string")
+            }
+            
+            if let project = lastEvent["project"] as? String {
+                XCTAssertEqual(project, client.config.projectId!, "Invalid value for project: \(project)")
+            }
+            else {
+                XCTFail("The project was not a string")
+            }
+            
+            if let level = lastEvent["level"] as? String {
+                XCTAssertEqual(level, "info", "Invalid value for level: \(level) ")
+            }
+            else {
+                XCTFail("The level was not a string")
+            }
+            
+            if let platform = lastEvent["platform"] as? String {
+                XCTAssertEqual(platform, "swift", "Invalid value for platform: \(platform)")
+            }
+            else {
+                XCTFail("Platform was not a string")
+            }
+        }
+        else {
+            XCTFail("The client was nil")
+        }
     }
     
-    func testCaptureMessageWithMessageAndLevel()
-    {
-        self.client!.captureMessage("An example message", level: .kRavenLogLevelDebugWarning)
-        var lastEvent = self.client!.lastEvent
-        
-        XCTAssertNotNil(lastEvent["event_id"], "Missing event_id")
-        XCTAssertNotNil(lastEvent["message"], "Missing message")
-        XCTAssertNotNil(lastEvent["project"], "Missing project")
-        XCTAssertNotNil(lastEvent["level"], "Missing level")
-        XCTAssertNotNil(lastEvent["timestamp"], "Missing timestamp")
-        XCTAssertNotNil(lastEvent["platform"], "Missing platform")
-        
-        let message: AnyObject! = lastEvent["message"]
-        XCTAssertEqual(message as String, "An example message", "Invalid value for message: \(message)")
-        
-        let project: AnyObject! = lastEvent["project"]
-        XCTAssertEqual(project as String, self.client!.config.projectId!, "Invalid value for project: \(project)")
-        
-        let level: AnyObject! = lastEvent["level"]
-        XCTAssertEqual(level as String, "warning", "Invalid value for level: \(level) ")
-        
-        let platform: AnyObject! = lastEvent["platform"]
-        XCTAssertEqual(platform as String, "swift", "Invalid value for platform: \(platform)")
+    func testCaptureMessageWithMessageAndLevel() {
+        if let client = client {
+            
+            let testMessage = "An example message"
+            let testLevel = RavenLogLevel.Warning
+            client.captureMessage(testMessage, level: testLevel)
+            let lastEvent = self.client!.lastEvent
+            
+            XCTAssertNotNil(lastEvent["event_id"], "Missing event_id")
+            XCTAssertNotNil(lastEvent["message"], "Missing message")
+            XCTAssertNotNil(lastEvent["project"], "Missing project")
+            XCTAssertNotNil(lastEvent["level"], "Missing level")
+            XCTAssertNotNil(lastEvent["timestamp"], "Missing timestamp")
+            XCTAssertNotNil(lastEvent["platform"], "Missing platform")
+            
+            
+            if let message = lastEvent["message"] as? String {
+                XCTAssertEqual(message, testMessage, "Invalid value for message: \(message)")
+            }
+            else {
+                XCTFail("Message was not a string")
+            }
+            
+            if let project = lastEvent["project"] as? String {
+                XCTAssertEqual(project, client.config.projectId!, "Invalid value for project: \(project)")
+            }
+            else {
+                XCTFail("Project was not a string")
+            }
+            
+            if let level = lastEvent["level"] as? String {
+                XCTAssertEqual(level, testLevel.rawValue, "Invalid value for level: \(level)")
+            }
+            else {
+                XCTFail("Warning was not a string")
+            }
+            
+            if let platform = lastEvent["platform"] as? String {
+                XCTAssertEqual(platform, "swift", "Invalid value for platform: \(platform)")
+            }
+            else {
+                XCTFail("Platform was not a string")
+            }
+        }
+        else {
+            XCTFail("The client was nil")
+        }
     }
     
     
-    func testCaptureMessageWithMessageAndLevelAndMethodAndFileAndLine()
-    {
-        self.client!.captureMessage("An example message", level:.kRavenLogLevelDebugWarning, method:"method name", file:"filename", line:34)
-        var lastEvent = self.client!.lastEvent
-
-        XCTAssertNotNil(lastEvent["event_id"], "Missing event_id")
-        XCTAssertNotNil(lastEvent["message"], "Missing message")
-        XCTAssertNotNil(lastEvent["project"], "Missing project")
-        XCTAssertNotNil(lastEvent["level"], "Missing level")
-        XCTAssertNotNil(lastEvent["timestamp"], "Missing timestamp")
-        XCTAssertNotNil(lastEvent["platform"], "Missing platform")
-        XCTAssertNotNil(lastEvent["stacktrace"], "Missing stacktrace")
-        
-        let message: AnyObject! = lastEvent["message"]
-        XCTAssertEqual(message as String, "An example message", "Invalid value for message: \(message)")
-        
-        let project: AnyObject! = lastEvent["project"]
-        XCTAssertEqual(project as String, self.client!.config.projectId!, "Invalid value for project: \(project)")
-        
-        let level: AnyObject! = lastEvent["level"]
-        XCTAssertEqual(level as String, "warning", "Invalid value for level: \(level) ")
-        
-        let platform: AnyObject! = lastEvent["platform"]
-        XCTAssertEqual(platform as String, "swift", "Invalid value for platform: \(platform)")
+    func testCaptureMessageWithMessageAndLevelAndMethodAndFileAndLine() {
+        if let client = client {
+            let testMessage = "An example message"
+            let testLevel = RavenLogLevel.Warning
+            let testMethod = "method name"
+            let testFile = "filename"
+            let testLine = 34
+            
+            client.captureMessage(testMessage, level: testLevel, method: testMethod, file: testFile, line: testLine)
+            let lastEvent = self.client!.lastEvent
+            
+            XCTAssertNotNil(lastEvent["event_id"], "Missing event_id")
+            XCTAssertNotNil(lastEvent["message"], "Missing message")
+            XCTAssertNotNil(lastEvent["project"], "Missing project")
+            XCTAssertNotNil(lastEvent["level"], "Missing level")
+            XCTAssertNotNil(lastEvent["timestamp"], "Missing timestamp")
+            XCTAssertNotNil(lastEvent["platform"], "Missing platform")
+            XCTAssertNotNil(lastEvent["stacktrace"], "Missing stacktrace")
+            
+            if let message = lastEvent["message"] as? String {
+                XCTAssertEqual(message, testMessage, "Invalid value for message: \(message)")
+            }
+            else {
+                XCTFail("Message was not a string")
+            }
+            
+            if let project = lastEvent["project"] as? String {
+                XCTAssertEqual(project, client.config.projectId!, "Invalid value for project: \(project)")
+            }
+            else {
+                XCTFail("Project was not a string")
+            }
+            
+            if let level = lastEvent["level"] as? String {
+                XCTAssertEqual(level, testLevel.rawValue, "Invalid value for level: \(level)")
+            }
+            else {
+                XCTFail("Warning was not a string")
+            }
+            
+            if let platform = lastEvent["platform"] as? String {
+                XCTAssertEqual(platform, "swift", "Invalid value for platform: \(platform)")
+            }
+            else {
+                XCTFail("Platform was not a string")
+            }
+        }
+        else {
+            XCTFail("The client was nil")
+        }
     }
     
-    func testCaptureMessageWithMessageAndLevelAndExtraAndTags()
-    {
-        self.client!.captureMessage("An example message", level:.kRavenLogLevelDebugWarning, additionalExtra:["key" : "extra value"],
-        additionalTags:["key" : "tag value"])
+    func testCaptureMessageWithMessageAndLevelAndExtraAndTags() {
+        if let client = client {
+            let testMessage = "An example message"
+            let testLevel = RavenLogLevel.Warning
+            
+            client.captureMessage(testMessage, level: testLevel, additionalExtra:["key" : "extra value"], additionalTags:["key" : "tag value"])
+            let lastEvent = self.client!.lastEvent
+            
+            XCTAssertNotNil(lastEvent["event_id"], "Missing event_id")
+            XCTAssertNotNil(lastEvent["message"], "Missing message")
+            XCTAssertNotNil(lastEvent["project"], "Missing project")
+            XCTAssertNotNil(lastEvent["level"], "Missing level")
+            XCTAssertNotNil(lastEvent["timestamp"], "Missing timestamp")
+            XCTAssertNotNil(lastEvent["platform"], "Missing platform")
+            XCTAssertNotNil(lastEvent["extra"], "Missing extra")
+            XCTAssertNotNil(lastEvent["tags"], "Missing tags")
+            
+            if let message = lastEvent["message"] as? String {
+                XCTAssertEqual(message, testMessage, "Invalid value for message: \(message)")
+            }
+            else {
+                XCTFail("Message was not a string")
+            }
+            
+            if let project = lastEvent["project"] as? String {
+                XCTAssertEqual(project, client.config.projectId!, "Invalid value for project: \(project)")
+            }
+            else {
+                XCTFail("Project was not a string")
+            }
+            
+            if let level = lastEvent["level"] as? String {
+                XCTAssertEqual(level, testLevel.rawValue, "Invalid value for level: \(level)")
+            }
+            else {
+                XCTFail("Warning was not a string")
+            }
+            
+            if let platform = lastEvent["platform"] as? String {
+                XCTAssertEqual(platform, "swift", "Invalid value for platform: \(platform)")
+            }
+            else {
+                XCTFail("Platform was not a string")
+            }
+        }
+        else {
+            XCTFail("The client was nil")
+        }
+    }
+    
+    func testClientWithExtraAndTags() {
+        let firstKey = "key"
+        let secondKey = "key2"
+        let extraValue = "extraValue"
+        let tagValue = "tagValue"
         
-        var lastEvent = self.client!.lastEvent
+        let testMessage = "An example message"
+        let testLevel = RavenLogLevel.Warning
         
-        XCTAssertNotNil(lastEvent["event_id"], "Missing event_id")
-        XCTAssertNotNil(lastEvent["message"], "Missing message")
-        XCTAssertNotNil(lastEvent["project"], "Missing project")
-        XCTAssertNotNil(lastEvent["level"], "Missing level")
-        XCTAssertNotNil(lastEvent["timestamp"], "Missing timestamp")
-        XCTAssertNotNil(lastEvent["platform"], "Missing platform")
+        let clientWithExtraAndTags = MockRavenClient(config: config!, extra: [firstKey: extraValue], tags: [firstKey: tagValue], logger: nil)
+        
+        clientWithExtraAndTags.captureMessage(testMessage, level: testLevel, additionalExtra: [secondKey: extraValue], additionalTags:[secondKey: tagValue])
+        
+        let lastEvent = clientWithExtraAndTags.lastEvent
+        
         XCTAssertNotNil(lastEvent["extra"], "Missing extra")
         XCTAssertNotNil(lastEvent["tags"], "Missing tags")
         
-        let extra: [String: AnyObject] = lastEvent["extra"]! as [String: AnyObject]
-        let extraValueForKey: AnyObject! = extra["key"]
-        XCTAssertEqual(extraValueForKey as String, "extra value", "Missing extra data");
+        if let extra = lastEvent["extra"] as? [String: AnyObject] {
+            if let extraValueForKey = extra[firstKey] as? String {
+                XCTAssertEqual(extraValueForKey, extraValue, "Missing extra data")
+            }
+            else {
+                XCTFail("First extra data could not be converted to a string")
+            }
+            
+            if let extraValueForKey2 = extra[secondKey] as? String {
+                XCTAssertEqual(extraValueForKey2, extraValue, "Missing extra data")
+            }
+            else {
+                XCTFail("Second extra data could not be converted to a string")
+            }
+        }
+        else {
+            XCTFail("Could not parse the extra information")
+        }
         
-        let tags: [String: AnyObject] = lastEvent["tags"]! as [String: AnyObject]
-        let tagValueForKey: AnyObject! = tags["key"]
-        XCTAssertEqual(tagValueForKey as String, "tag value", "Missing tags data");
-        
-        let message: AnyObject! = lastEvent["message"]
-        XCTAssertEqual(message as String, "An example message", "Invalid value for message: \(message)")
-        
-        let project: AnyObject! = lastEvent["project"]
-        XCTAssertEqual(project as String, self.client!.config.projectId!, "Invalid value for project: \(project)")
-        
-        let level: AnyObject! = lastEvent["level"]
-        XCTAssertEqual(level as String, "warning", "Invalid value for level: \(level) ")
-        
-        let platform: AnyObject! = lastEvent["platform"]
-        XCTAssertEqual(platform as String, "swift", "Invalid value for platform: \(platform)")
+        if let tags = lastEvent["tags"] as? [String: AnyObject] {
+            if let tagValueForKey = tags[firstKey] as? String {
+                XCTAssertEqual(tagValueForKey, tagValue, "Missing tags data")
+            }
+            else {
+                XCTFail("First tag data could not be converted to a string")
+            }
+            
+            if let tagValueForKey2 = tags[secondKey] as? String {
+                XCTAssertEqual(tagValueForKey2, tagValue, "Missing tags data")
+            }
+            else {
+                XCTFail("Second tag data could not be converted to a string")
+            }
+            
+            XCTAssertNotNil(tags["OS version"], "Missing tags data (OS Version)")
+            XCTAssertNotNil(tags["Device model"], "Missing tags data (Device Model)")
+        }
+        else {
+            XCTFail("Could not parse the tag information")
+        }
     }
     
-    func testClientWithExtraAndTags()
-    {
-        var clientWithExtraAndTags = MockRavenClient(config: config!, extra: ["key" : "value"], tags: ["key" : "value"], logger: nil)
+    func testClientWithRewritingExtraAndTags() {
+        let key = "key"
+        let extraValue = "extraValue"
+        let secondExtraValue = "AnotherExtraValue"
+        let tagValue = "tagValue"
+        let secondTagValue = "AnotherTagValue"
         
-        clientWithExtraAndTags.captureMessage("An example message",level:.kRavenLogLevelDebugWarning, additionalExtra:["key2" : "extra value"], additionalTags:["key2" : "tag value"])
+        let testMessage = "An example message"
+        let testLevel = RavenLogLevel.Warning
         
-        var lastEvent = clientWithExtraAndTags.lastEvent
+        let clientWithExtraAndTags = MockRavenClient(config: config!, extra: [key: extraValue], tags: [key: tagValue], logger: nil)
+        
+        clientWithExtraAndTags.captureMessage(testMessage, level: testLevel, additionalExtra: [key: secondExtraValue], additionalTags:[key: secondTagValue])
+        
+        let lastEvent = clientWithExtraAndTags.lastEvent
         
         XCTAssertNotNil(lastEvent["extra"], "Missing extra")
         XCTAssertNotNil(lastEvent["tags"], "Missing tags")
         
-        let extra: [String: AnyObject] = lastEvent["extra"]! as [String: AnyObject]
-        let extraValueForKey: AnyObject! = extra["key"]
-        let extraValueForKey2: AnyObject! = extra["key2"]
+        if let extra = lastEvent["extra"] as? [String: AnyObject] {
+            if let extraValueForKey = extra[key] as? String {
+                XCTAssertEqual(extraValueForKey, secondExtraValue, "Incorrect extra data")
+                XCTAssertNotEqual(extraValueForKey, extraValue, "Extra data was not rewritten")
+            }
+            else {
+                XCTFail("First extra data could not be converted to a string")
+            }
+        }
+        else {
+            XCTFail("Could not parse the extra information")
+        }
         
-        XCTAssertEqual(extraValueForKey as String, "value", "Missing extra data")
-        XCTAssertEqual(extraValueForKey2 as String, "extra value", "Missing extra data")
-        
-        let tags: [String: String] = lastEvent["tags"]! as [String: String]
-        let tagValueForKey: AnyObject! = tags["key"]
-        let tagValueForKey2: AnyObject! = tags["key2"]
-        let tagValueForOsVersion: AnyObject? = tags["OS version"]
-        let tagValueForDeviceModel: AnyObject? = tags["Device model"]
-        
-        XCTAssertEqual(tagValueForKey as String, "value", "Missing tags data")
-        XCTAssertEqual(tagValueForKey2 as String, "tag value", "Missing tags data")
-        
-        XCTAssertNotNil(tagValueForOsVersion, "Missing tags data")
-        XCTAssertNotNil(tagValueForDeviceModel, "Missing tags data")
-        
+        if let tags = lastEvent["tags"] as? [String: AnyObject] {
+            if let tagValueForKey = tags[key] as? String {
+                XCTAssertEqual(tagValueForKey, secondTagValue, "Incorrect tags data")
+                XCTAssertNotEqual(tagValueForKey, tagValue, "Tag data was not rewritten")
+            }
+            else {
+                XCTFail("First tag data could not be converted to a string")
+            }
+            
+            XCTAssertNotNil(tags["OS version"], "Missing tags data (OS Version)")
+            XCTAssertNotNil(tags["Device model"], "Missing tags data (Device Model)")
+        }
+        else {
+            XCTFail("Could not parse the tag information")
+        }
     }
     
-    func testClientWithRewritingExtraAndTags()
-    {
-        var clientWithExtraAndTags = MockRavenClient(config: config!, extra: ["key" : "value"], tags: ["key" : "value"], logger: nil)
-       
-        clientWithExtraAndTags.captureMessage("An example message", level: .kRavenLogLevelDebugWarning, additionalExtra: ["key" : "extra value"], additionalTags: ["key": "tag value"])
-        var lastEvent = clientWithExtraAndTags.lastEvent
+    func testClientWithLogger() {
+        let testMessage = "An example message"
+        let loggerValue = "Logger value"
+        var clientWithExtraAndTags = MockRavenClient(config: config!, extra: ["key" : "value"], tags: ["key" : "value"], logger: loggerValue)
         
-        XCTAssertNotNil(lastEvent["extra"], "Missing extra")
-        XCTAssertNotNil(lastEvent["tags"], "Missing tags")
-
-        let extra: [String: AnyObject] = lastEvent["extra"]! as [String: AnyObject]
-        let extraValueForKey: AnyObject! = extra["key"]
-        XCTAssertEqual(extraValueForKey as String, "extra value", "Missing extra data")
+        clientWithExtraAndTags.captureMessage(testMessage)
         
-        let tags: [String: String] = lastEvent["tags"]! as [String: String]
-        let tagValueForKey: AnyObject! = tags["key"]
-        XCTAssertEqual(tagValueForKey as String, "tag value", "Missing tags data")
-    }
-    
-    func testClientWithLogger()
-    {
-        var clientWithExtraAndTags = MockRavenClient(config: config!, extra: ["key" : "value"], tags: ["key" : "value"], logger: "Logger value")
+        let lastEvent = clientWithExtraAndTags.lastEvent
         
-        clientWithExtraAndTags.captureMessage("An example message")
+        if let message = lastEvent["message"] as? String {
+            XCTAssertEqual(message, testMessage, "Incorrect value for message \(message)")
+        }
+        else {
+            XCTFail("Message was not a string")
+        }
         
-        var lastEvent = clientWithExtraAndTags.lastEvent
-        
-        let message: AnyObject! = lastEvent["message"]
-        XCTAssertEqual(message as String, "An example message", "Invalid value for message: \(message)")
-        
-        let logger: AnyObject! = lastEvent["logger"]
-        XCTAssertEqual(logger as String, "Logger value", "Invalid value for logger: \(logger)")
+        if let logger = lastEvent["logger"] as? String {
+            XCTAssertEqual(logger, loggerValue, "Incorrect valid for the logger \(logger)")
+        }
+        else {
+            XCTFail("Logger was not a string")
+        }
     }
 }
