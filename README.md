@@ -1,7 +1,5 @@
 # raven-swift
 
-[![Join the chat at https://gitter.im/getsentry/raven-swift](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/getsentry/raven-swift?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 Swift client for [Sentry](https://www.getsentry.com/welcome/).
 
 
@@ -105,9 +103,11 @@ https://github.com/getsentry/raven-swift/issues
 
 ## Contributing
 
+[![Join the chat at https://gitter.im/getsentry/raven-swift](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/getsentry/raven-swift?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 raven-swift is an open source project and your contribution is very much appreciated.
 
-1. Check for [open issues](https://github.com/getsentry/raven-swift/issues) or [open a fresh issue](https://github.com/getsentry/raven-swift/issues/new) to start a discussion around a feature idea or a bug.
+1. Check for [open issues](https://github.com/getsentry/raven-swift/issues) or [open a fresh issue](https://github.com/getsentry/raven-swift/issues/new) or check [Gitter](https://gitter.im/getsentry/raven-swift?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to start a discussion around a feature idea or a bug.
 2. Fork the [repository on Github](https://github.com/getsentry/raven-swift) and make your changes.
 3. Make sure to add yourself to AUTHORS and send a pull request.
 
