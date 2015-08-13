@@ -1,7 +1,5 @@
 # raven-swift
 
-[![Join the chat at https://gitter.im/getsentry/raven-swift](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/getsentry/raven-swift?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 Swift client for [Sentry](https://www.getsentry.com/welcome/).
 
 
@@ -31,7 +29,7 @@ Alternatively you can add this code as a Git submodule:
 
 ## How to get started
 
-*Note: If you are using cocoapods, import ```RavenSwift``` any where the raven client is used*
+*Note: If you are using cocoapods, import ```RavenSwift``` anywhere the raven client is used*
 
 While you are free to initialize as many instances of `RavenClient` as is appropriate for your application, there is a shared singleton instance that is globally available. This singleton instance is often configured in your app delegate's `application:didFinishLaunchingWithOptions:` method:
 
@@ -105,9 +103,11 @@ https://github.com/getsentry/raven-swift/issues
 
 ## Contributing
 
+[![Join the chat at https://gitter.im/getsentry/raven-swift](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/getsentry/raven-swift?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 raven-swift is an open source project and your contribution is very much appreciated.
 
-1. Check for [open issues](https://github.com/getsentry/raven-swift/issues) or [open a fresh issue](https://github.com/getsentry/raven-swift/issues/new) to start a discussion around a feature idea or a bug.
+1. Check for [open issues](https://github.com/getsentry/raven-swift/issues) or [open a fresh issue](https://github.com/getsentry/raven-swift/issues/new) or check [Gitter](https://gitter.im/getsentry/raven-swift?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to start a discussion around a feature idea or a bug.
 2. Fork the [repository on Github](https://github.com/getsentry/raven-swift) and make your changes.
 3. Make sure to add yourself to AUTHORS and send a pull request.
 
