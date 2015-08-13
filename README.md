@@ -29,7 +29,7 @@ Alternatively you can add this code as a Git submodule:
 
 ## How to get started
 
-*Note: If you are using cocoapods, import ```RavenSwift``` any where the raven client is used*
+*Note: If you are using cocoapods, import ```RavenSwift``` anywhere the raven client is used*
 
 While you are free to initialize as many instances of `RavenClient` as is appropriate for your application, there is a shared singleton instance that is globally available. This singleton instance is often configured in your app delegate's `application:didFinishLaunchingWithOptions:` method:
 
