@@ -24,7 +24,7 @@ public class RavenConfig {
                 
                 pathComponents.removeLast() // remove the project id...
                 
-                var path = "/".join(pathComponents)  // ...and construct the path again
+                var path = pathComponents.joinWithSeparator("/")  // ...and construct the path again
                 
                 // Add a slash to the end of the path if there is a path
                 if (path != "") {
