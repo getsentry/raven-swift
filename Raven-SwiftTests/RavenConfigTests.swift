@@ -28,7 +28,7 @@ class RavenConfigTests: XCTestCase {
             
             let expectedURL = "http://example.com:8000/api/project-id/store/"
             
-            XCTAssert(config.serverUrl!.absoluteString == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString!)")
+            XCTAssert(config.serverUrl!.absoluteString == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString)")
         }
         else {
             XCTFail("Failed to parse DSN")
