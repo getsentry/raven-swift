@@ -32,7 +32,7 @@ class RavenClientTests: XCTestCase {
     
     func testGenerateUUID() {
         let uuid = client!.generateUUID()
-        XCTAssert(count(uuid) == 32 , "Invalid value for UUID returned: \(uuid)")
+        XCTAssert(uuid.characters.count == 32 , "Invalid value for UUID returned: \(uuid)")
     }
     
     func testCaptureMessageWithOnlyMessage() {
@@ -346,7 +346,7 @@ class RavenClientTests: XCTestCase {
     func testClientWithLogger() {
         let testMessage = "An example message"
         let loggerValue = "Logger value"
-        var clientWithExtraAndTags = MockRavenClient(config: config!, extra: ["key" : "value"], tags: ["key" : "value"], logger: loggerValue)
+        let clientWithExtraAndTags = MockRavenClient(config: config!, extra: ["key" : "value"], tags: ["key" : "value"], logger: loggerValue)
         
         clientWithExtraAndTags.captureMessage(testMessage)
         
