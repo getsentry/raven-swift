@@ -203,7 +203,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         var culprit : String = ""
         
         if (method != nil && file != nil && line > 0) {
-            let filename = file!.lastPathComponent;
+            let filename = (file! as NSString).lastPathComponent;
             let frame = ["filename" : filename, "function" : method!, "lineno" : line]
             stacktrace = [frame]
             culprit = "\(method!) in \(filename)"
@@ -321,7 +321,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         
         if (method != nil && file != nil && line > 0) {
             var frame = [String: AnyObject]()
-            frame = ["filename" : file!.lastPathComponent, "function" : method!, "lineno" : line]
+            frame = ["filename" : (file! as NSString).lastPathComponent, "function" : method!, "lineno" : line]
             stacktrace = [frame]
         }
 
@@ -361,7 +361,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         NSSetUncaughtExceptionHandler(exceptionHandlerPtr)
         
         // Process saved crash reports
-        var reports : [AnyObject]? = NSUserDefaults.standardUserDefaults().arrayForKey(userDefaultsKey)
+        let reports : [AnyObject]? = NSUserDefaults.standardUserDefaults().arrayForKey(userDefaultsKey)
         if (reports != nil && reports?.count > 0) {
             for data in reports! {
                 let JSONString = data as! String
