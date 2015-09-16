@@ -35,7 +35,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     internal let config: RavenConfig
     
     private var dateFormatter : NSDateFormatter {
-        var dateFormatter = NSDateFormatter()
+        let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: "UTC")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return dateFormatter
@@ -125,7 +125,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             return client
         }
         else {
-            println("Invalid DSN: \(DSN)!")
+            print("Invalid DSN: \(DSN)!")
             return nil
         }
     }
@@ -227,6 +227,18 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     }
     
     
+    //MARK: - ErrorType
+    
+    /**
+    Capture an error that conforms the ErrorType protocol
+    
+    :param: error  The error to capture
+    */
+    public func captureError<E where E:ErrorType, E:StringLiteralConvertible>(error: E, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__) {
+        RavenClient.sharedClient?.captureMessage("\(error)", level: .Error, method: method, file: file, line: line )
+    }
+    
+    
     //MARK: - Exception
     
     
@@ -268,7 +280,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         
         if (!callStack.isEmpty) {
             for call in callStack {
-                stacktrace.append(["function": call as! String])
+                stacktrace.append(["function": call])
             }
         }
         
@@ -316,7 +328,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         let callStack = exception.callStackSymbols
 
         for call in callStack {
-            stacktrace.append(["function": call as! String])
+            stacktrace.append(["function": call])
         }
         
         let data = self.prepareDictionaryForMessage(message, level: .Fatal, additionalExtra: [:], additionalTags: [:], culprit: nil, stacktrace: stacktrace, exception: exceptionDict)
@@ -366,7 +378,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     public func connection(connection: NSURLConnection, didFailWithError error: NSError) {
         let userInfo = error.userInfo as! [String: AnyObject]
         let errorKey: AnyObject? = userInfo[NSURLErrorFailingURLStringErrorKey]
-        println("Connection failed! Error - \(error.localizedDescription) \(errorKey!)")
+        print("Connection failed! Error - \(error.localizedDescription) \(errorKey!)")
     }
   
     public func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
@@ -376,7 +388,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     }
     
     public func connectionDidFinishLoading(connection: NSURLConnection) {
-        println("JSON sent to Sentry")
+        print("JSON sent to Sentry")
     }
 
     //MARK: - Internal methods
@@ -450,8 +462,11 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     }
     
     private func encodeJSON(obj: AnyObject) -> NSData? {
-        let data = NSJSONSerialization.dataWithJSONObject(obj, options: nil , error:nil)
-        return data
+        do {
+            return try NSJSONSerialization.dataWithJSONObject(obj, options: [])
+        } catch _ {
+            return nil
+        }
     }
     
     private func sendJSON(JSON: NSData?) {
@@ -461,7 +476,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         println(header)
         #endif
         
-        var request = NSMutableURLRequest(URL: self.config.serverUrl)
+        let request = NSMutableURLRequest(URL: self.config.serverUrl)
         request.HTTPMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -469,7 +484,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         request.HTTPBody = JSON
         request.setValue("\(header)", forHTTPHeaderField:"X-Sentry-Auth")
         
-        let connection = NSURLConnection(request: request, delegate: self)
+        _ = NSURLConnection(request: request, delegate: self)
         
         #if DEBUG
         let debug = NSString(data: JSON!, encoding: NSUTF8StringEncoding)
