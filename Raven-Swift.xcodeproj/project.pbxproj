@@ -302,7 +302,9 @@
 		652C5DDA19B7AA2C002CD4A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = OKB;
 				TargetAttributes = {
 					030E0E4F1A89D32200E5E6BE = {
@@ -456,6 +458,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.getsentry.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Raven;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -481,6 +484,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.getsentry.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Raven;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -507,6 +511,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.getsentry.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Raven;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Raven/Bridging-Header.h";
@@ -530,6 +535,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.getsentry.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Raven;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Raven/Bridging-Header.h";
@@ -560,6 +566,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -633,6 +640,7 @@
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.getsentry.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_MODULE_NAME = Raven_Example;
 				PRODUCT_NAME = "Raven-Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -650,6 +658,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.getsentry.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_MODULE_NAME = Raven_Example;
 				PRODUCT_NAME = "Raven-Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -672,6 +681,7 @@
 				INFOPLIST_FILE = "Raven-SwiftTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.okb.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Raven-SwiftTests/Raven-SwiftTests-Bridging-Header.h";
 			};
@@ -690,6 +700,7 @@
 				INFOPLIST_FILE = "Raven-SwiftTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.okb.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Raven-SwiftTests/Raven-SwiftTests-Bridging-Header.h";
 			};
@@ -741,6 +752,7 @@
 				BF2F98231B53578D008564F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
