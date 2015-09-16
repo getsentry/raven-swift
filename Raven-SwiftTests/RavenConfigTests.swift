@@ -28,7 +28,7 @@ class RavenConfigTests: XCTestCase {
             
             let expectedURL = "http://example.com:8000/api/project-id/store/"
             
-            XCTAssert(config.serverUrl!.absoluteString! == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString!)")
+            XCTAssert(config.serverUrl!.absoluteString == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString!)")
         }
         else {
             XCTFail("Failed to parse DSN")
@@ -44,7 +44,7 @@ class RavenConfigTests: XCTestCase {
             
             let expectedURL = "https://example.com:443/api/project-id/store/"
             
-            XCTAssert(config.serverUrl!.absoluteString! == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString!)")
+            XCTAssert(config.serverUrl!.absoluteString == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString)")
         }
         else {
             XCTFail("Failed to parse DSN")
@@ -60,7 +60,7 @@ class RavenConfigTests: XCTestCase {
             
             let expectedURL = "http://example.com:80/api/project-id/store/"
             
-            XCTAssert(config.serverUrl!.absoluteString! == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString!)")
+            XCTAssert(config.serverUrl!.absoluteString == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString)")
         }
         else {
             XCTFail("Failed to parse DSN")
@@ -71,7 +71,7 @@ class RavenConfigTests: XCTestCase {
         if let config = RavenConfig(DSN: "https://example.com/project-id") {
             
             let expectedURL = "https://example.com:443/api/project-id/store/"
-            XCTAssert(config.serverUrl!.absoluteString! == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString!)")
+            XCTAssert(config.serverUrl!.absoluteString == expectedURL, "Got incorrect serverURL \(config.serverUrl!.absoluteString)")
             
             XCTAssertEqual(config.publicKey!, "", "Got incorrect publicKey \(config.publicKey)")
             XCTAssertEqual(config.secretKey!, "", "Got incorrect secretKey \(config.secretKey)")
