@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RavenSwift"
-  s.version      = "0.3.0"
+  s.version      = "0.3.1"
   s.summary      = "swift client for sentry"
   s.homepage     = "https://github.com/getsentry/raven-swift"
   s.license      = "mit"
