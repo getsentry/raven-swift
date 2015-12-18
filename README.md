@@ -6,7 +6,7 @@ Swift client for [Sentry](https://www.getsentry.com/welcome/).
 ## Installation
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)  
-[![CocoaPods](https://img.shields.io/cocoapods/v/RavenSwift.svg)]()
+[![CocoaPods](https://img.shields.io/cocoapods/v/RavenSwift.svg)](https://cocoapods.org/pods/RavenSwift)
 
 The easiest way is to use [CocoaPods](http://cocoapods.org). It takes care of all of the setup, required frameworks and third party dependencies:
 
