@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
       
-        RavenClient.clientWithDSN("https://30d629f2df9c4fdf8507e1704c09a526:f766cf8e0fff446986ac6daf1902e832@app.getsentry.com/888")
+        RavenClient.clientWithDSN("https://663998f40e734ea59087883feda37647:306481b9f6bb4a6287b334178d9f8c71@app.getsentry.com/4394")
         
         RavenClient.sharedClient?.setupExceptionHandler()
 
