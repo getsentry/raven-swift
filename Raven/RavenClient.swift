@@ -61,7 +61,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     :param: tags  extra tags that will be added to logs
     :param: logger  Name of the logger
     */
-    public init(config: RavenConfig, extra: [String : AnyObject], tags: [String: String], logger: String?) {
+    public init(config: RavenConfig, extra: [String : AnyObject], tags: [String: AnyObject], logger: String?) {
         self.config = config
         self.extra = extra
         self.tags = tags
@@ -79,7 +79,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     :param: extra  extra data that will be sent with logs
     :param: tags  extra tags that will be added to logs
     */
-    public convenience init(config: RavenConfig, extra: [String: AnyObject], tags: [String: String]) {
+    public convenience init(config: RavenConfig, extra: [String: AnyObject], tags: [String: AnyObject]) {
         self.init(config: config, extra: extra, tags: tags, logger: nil)
     }
 
@@ -114,7 +114,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
 
     :returns: The RavenClient instance
     */
-    public class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: String], logger: String?) -> RavenClient? {
+    public class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: AnyObject], logger: String?) -> RavenClient? {
         if let config = RavenConfig(DSN: DSN) {
             let client = RavenClient(config: config, extra: extra, tags: tags, logger: logger)
 
@@ -139,7 +139,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
 
     :returns: The RavenClient instance
     */
-    public class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: String]) -> RavenClient? {
+    public class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: AnyObject]) -> RavenClient? {
         return RavenClient.clientWithDSN(DSN, extra: extra, tags: tags, logger: nil)
     }
 
@@ -270,7 +270,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     :param: additionalTags  Additional tags that will be sent with the log
     :param: sendNow  Control whether the exception is sent to the server now, or when the app is next opened
     */
-    public func captureException(exception:NSException, additionalExtra:[String: AnyObject], additionalTags: [String: String], sendNow:Bool) {
+    public func captureException(exception:NSException, additionalExtra:[String: AnyObject], additionalTags: [String: AnyObject], sendNow:Bool) {
         let message = "\(exception.name): \(exception.reason!)"
         let exceptionDict = ["type": exception.name, "value": exception.reason!]
 
