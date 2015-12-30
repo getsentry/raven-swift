@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BF2F981A1B53578D008564F5"
+               BuildableName = "Raven-Swift Tests.xctest"
+               BlueprintName = "Raven-Swift Tests"
+               ReferencedContainer = "container:Raven-Swift.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "030E0E741A89D34D00E5E6BE"
+            BuildableName = "Raven.framework"
+            BlueprintName = "Raven-iOS"
+            ReferencedContainer = "container:Raven-Swift.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

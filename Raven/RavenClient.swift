@@ -7,7 +7,7 @@
 
 import Foundation
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
     import UIKit
 #endif
 
@@ -400,7 +400,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             }
         }
 
-        #if os(iOS)
+        #if os(iOS) || os(tvOS)
             if (tags["OS version"] == nil) {
                 tags["OS version"] = UIDevice.currentDevice().systemVersion
             }
