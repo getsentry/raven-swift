@@ -13,7 +13,7 @@ import Foundation
 
 let userDefaultsKey = "nl.mixedCase.RavenClient.Exceptions"
 let sentryProtocol = "4"
-let sentryClient = "raven-swift/0.3.0"
+let sentryClient = "raven-swift/0.4.0"
 
 public enum RavenLogLevel: String {
     case Debug = "debug"
