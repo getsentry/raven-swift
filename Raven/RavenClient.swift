@@ -468,7 +468,7 @@ public class RavenClient : NSObject {
         request.setValue("\(header)", forHTTPHeaderField:"X-Sentry-Auth")
         
         let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-        session.dataTaskWithRequest(request, completionHandler: {
+        let task = session.dataTaskWithRequest(request, completionHandler: {
             (_, response, error) in
             if let error = error {
                 let userInfo = error.userInfo as! [String: AnyObject]
@@ -482,6 +482,7 @@ public class RavenClient : NSObject {
             }
             print("JSON sent to Sentry")
         })
+        task.resume()
         
         #if DEBUG
         let debug = NSString(data: JSON!, encoding: NSUTF8StringEncoding)
