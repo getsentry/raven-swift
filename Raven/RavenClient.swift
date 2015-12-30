@@ -7,7 +7,7 @@
 
 import Foundation
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
     import UIKit
 #endif
 
@@ -25,7 +25,7 @@ public enum RavenLogLevel: String {
 
 private var _RavenClientSharedInstance : RavenClient?
 
-public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate  {
+public class RavenClient : NSObject {
     //MARK: - Properties
     public var extra: [String: AnyObject]
     public var tags: [String: AnyObject]
@@ -374,23 +374,6 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
     }
 
 
-    //MARK: - NSURLConnection
-    public func connection(connection: NSURLConnection, didFailWithError error: NSError) {
-        let userInfo = error.userInfo as! [String: AnyObject]
-        let errorKey: AnyObject? = userInfo[NSURLErrorFailingURLStringErrorKey]
-        print("Connection failed! Error - \(error.localizedDescription) \(errorKey!)")
-    }
-
-    public func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
-        #if DEBUG
-            println("Response from Sentry: \(response)")
-        #endif
-    }
-
-    public func connectionDidFinishLoading(connection: NSURLConnection) {
-        print("JSON sent to Sentry")
-    }
-
     //MARK: - Internal methods
     internal func setDefaultTags() {
         if tags["Build version"] == nil {
@@ -400,7 +383,7 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
             }
         }
 
-        #if os(iOS)
+        #if os(iOS) || os(tvOS)
             if (tags["OS version"] == nil) {
                 tags["OS version"] = UIDevice.currentDevice().systemVersion
             }
@@ -483,9 +466,24 @@ public class RavenClient : NSObject, NSURLConnectionDelegate, NSURLConnectionDat
         request.setValue("\(JSON?.length)", forHTTPHeaderField: "Content-Length")
         request.HTTPBody = JSON
         request.setValue("\(header)", forHTTPHeaderField:"X-Sentry-Auth")
+        
+        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+        let task = session.dataTaskWithRequest(request, completionHandler: {
+            (_, response, error) in
+            if let error = error {
+                let userInfo = error.userInfo as! [String: AnyObject]
+                let errorKey: AnyObject? = userInfo[NSURLErrorFailingURLStringErrorKey]
+                print("Connection failed! Error - \(error.localizedDescription) \(errorKey!)")
 
-        _ = NSURLConnection(request: request, delegate: self)
-
+            } else if let response = response {
+                #if DEBUG
+                    println("Response from Sentry: \(response)")
+                #endif
+            }
+            print("JSON sent to Sentry")
+        })
+        task.resume()
+        
         #if DEBUG
         let debug = NSString(data: JSON!, encoding: NSUTF8StringEncoding)
         println(debug)

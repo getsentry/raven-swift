@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Raven
 
 let testDSN = "http://public:secret@example.com/foo"
 
