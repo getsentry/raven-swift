@@ -483,8 +483,6 @@ public class RavenClient : NSObject {
             print("JSON sent to Sentry")
         })
         
-        //_ = NSURLConnection(request: request, delegate: self)
-
         #if DEBUG
         let debug = NSString(data: JSON!, encoding: NSUTF8StringEncoding)
         println(debug)
