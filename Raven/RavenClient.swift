@@ -32,7 +32,7 @@ public class RavenClient : NSObject {
     public var user: [String: AnyObject]?
     public let logger: String?
 
-    internal let config: RavenConfig
+    internal let config: RavenConfig?
 
     private var dateFormatter : NSDateFormatter {
         let dateFormatter = NSDateFormatter()
@@ -61,7 +61,7 @@ public class RavenClient : NSObject {
     :param: tags  extra tags that will be added to logs
     :param: logger  Name of the logger
     */
-    public init(config: RavenConfig, extra: [String : AnyObject], tags: [String: AnyObject], logger: String?) {
+    public init(config: RavenConfig?, extra: [String : AnyObject], tags: [String: AnyObject], logger: String?) {
         self.config = config
         self.extra = extra
         self.tags = tags
@@ -69,6 +69,10 @@ public class RavenClient : NSObject {
 
         super.init()
         setDefaultTags()
+        
+        if (_RavenClientSharedInstance == nil) {
+            _RavenClientSharedInstance = self
+        }
     }
 
 
@@ -117,14 +121,17 @@ public class RavenClient : NSObject {
     public class func clientWithDSN(DSN: String, extra: [String: AnyObject], tags: [String: AnyObject], logger: String?) -> RavenClient? {
         if let config = RavenConfig(DSN: DSN) {
             let client = RavenClient(config: config, extra: extra, tags: tags, logger: logger)
-
-            if (_RavenClientSharedInstance == nil) {
-                _RavenClientSharedInstance = client
-            }
-
+            
             return client
         }
         else {
+            guard !DSN.isEmpty else {
+                print("Empty DSN. Client will only print JSON locally")
+                let client = RavenClient(config: nil, extra: extra, tags: tags, logger: logger)
+                
+                return client
+            }
+            
             print("Invalid DSN: \(DSN)!")
             return nil
         }
@@ -428,7 +435,7 @@ public class RavenClient : NSObject {
         }
 
         let returnDict : [String: AnyObject] = ["event_id" : self.generateUUID(),
-            "project"   : self.config.projectId!,
+            "project"   : self.config?.projectId ?? "",
             "timestamp" : self.dateFormatter.stringFromDate(NSDate()),
             "level"     : level.rawValue,
             "platform"  : "swift",
@@ -453,13 +460,23 @@ public class RavenClient : NSObject {
     }
 
     private func sendJSON(JSON: NSData?) {
-        let header = "Sentry sentry_version=\(sentryProtocol), sentry_client=\(sentryClient), sentry_timestamp=\(NSDate.timeIntervalSinceReferenceDate()), sentry_key=\(self.config.publicKey), sentry_secret=\(self.config.secretKey)"
+        guard let config = self.config else {
+            guard let jsonString = String(data: JSON!, encoding: NSUTF8StringEncoding) else {
+                print("Could not print JSON using UTF8 encoding")
+                return
+            }
+            
+            print(jsonString)
+            return
+        }
+
+        let header = "Sentry sentry_version=\(sentryProtocol), sentry_client=\(sentryClient), sentry_timestamp=\(NSDate.timeIntervalSinceReferenceDate()), sentry_key=\(config.publicKey), sentry_secret=\(config.secretKey)"
 
         #if DEBUG
         println(header)
         #endif
 
-        let request = NSMutableURLRequest(URL: self.config.serverUrl)
+        let request = NSMutableURLRequest(URL: config.serverUrl)
         request.HTTPMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -483,10 +500,5 @@ public class RavenClient : NSObject {
             print("JSON sent to Sentry")
         })
         task.resume()
-        
-        #if DEBUG
-        let debug = NSString(data: JSON!, encoding: NSUTF8StringEncoding)
-        println(debug)
-        #endif
     }
 }
