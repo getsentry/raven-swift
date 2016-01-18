@@ -230,7 +230,7 @@ public class RavenClient : NSObject {
     :param: error  The error to capture
     */
     public func captureError(error : NSError, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__) {
-        RavenClient.sharedClient?.captureMessage("\(error)", level: .Error, method: method, file: file, line: line )
+        self.captureMessage("\(error)", level: .Error, method: method, file: file, line: line )
     }
 
 
@@ -242,7 +242,7 @@ public class RavenClient : NSObject {
     :param: error  The error to capture
     */
     public func captureError<E where E:ErrorType, E:StringLiteralConvertible>(error: E, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__) {
-        RavenClient.sharedClient?.captureMessage("\(error)", level: .Error, method: method, file: file, line: line )
+        self.captureMessage("\(error)", level: .Error, method: method, file: file, line: line )
     }
 
 
