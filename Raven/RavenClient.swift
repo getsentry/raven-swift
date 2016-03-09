@@ -241,7 +241,7 @@ public class RavenClient : NSObject {
 
     :param: error  The error to capture
     */
-    public func captureError<E where E:ErrorType, E:StringLiteralConvertible>(error: E, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__) {
+    public func captureError<E where E:ErrorType, E:CustomStringConvertible>(error: E, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__) {
         self.captureMessage("\(error)", level: .Error, method: method, file: file, line: line )
     }
 
