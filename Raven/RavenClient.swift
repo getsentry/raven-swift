@@ -100,7 +100,7 @@ public class RavenClient {
     - parameter additionalExtra: Additional data to be sent with the message.
     - parameter additionalTags: Additional tags to be sent with the message.
     */
-    public func captureMessage(message: String, level: LogLevel = .Info, additionalExtra: [String: AnyObject]? = nil, additionalTags: [String: AnyObject]? = nil, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__) {
+    public func captureMessage(message: String, level: LogLevel = .Info, additionalExtra: [String: AnyObject]? = nil, additionalTags: [String: AnyObject]? = nil, method: String? = #function, file: String? = #file, line: Int = #line) {
         var stacktrace: [AnyObject] = []
         var culprit: String = ""
 
@@ -123,7 +123,7 @@ public class RavenClient {
 
     :param: error  The error to capture
     */
-    public func captureError(error: NSError, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__) {
+    public func captureError(error: NSError, method: String? = #function, file: String? = #file, line: Int = #line) {
         captureMessage("\(error)", level: .Error, method: method, file: file, line: line )
     }
 
@@ -135,7 +135,7 @@ public class RavenClient {
 
     :param: error  The error to capture
     */
-    public func captureError<E where E: ErrorType, E: CustomStringConvertible>(error: E, method: String? = __FUNCTION__, file: String? = __FILE__, line: Int = __LINE__) {
+    public func captureError<E where E: ErrorType, E: CustomStringConvertible>(error: E, method: String? = #function, file: String? = #file, line: Int = #line) {
         self.captureMessage("\(error)", level: .Error, method: method, file: file, line: line )
     }
 
