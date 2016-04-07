@@ -16,7 +16,7 @@ class MockRavenClient : RavenClient {
 
     override func sendDictionary(dict: [String : AnyObject]) {
         lastEvent = dict
-        numEvents++
+        numEvents += 1
     }
 }
 
@@ -58,7 +58,7 @@ class RavenClientTests: XCTestCase {
             }
 
             if let project = lastEvent["project"] as? String {
-                XCTAssertEqual(project, client.config.projectId!, "Invalid value for project: \(project)")
+                XCTAssertEqual(project, client.config!.projectId!, "Invalid value for project: \(project)")
             }
             else {
                 XCTFail("The project was not a string")
@@ -107,7 +107,7 @@ class RavenClientTests: XCTestCase {
             }
 
             if let project = lastEvent["project"] as? String {
-                XCTAssertEqual(project, client.config.projectId!, "Invalid value for project: \(project)")
+                XCTAssertEqual(project, client.config!.projectId!, "Invalid value for project: \(project)")
             }
             else {
                 XCTFail("Project was not a string")
@@ -160,7 +160,7 @@ class RavenClientTests: XCTestCase {
             }
 
             if let project = lastEvent["project"] as? String {
-                XCTAssertEqual(project, client.config.projectId!, "Invalid value for project: \(project)")
+                XCTAssertEqual(project, client.config!.projectId!, "Invalid value for project: \(project)")
             }
             else {
                 XCTFail("Project was not a string")
@@ -210,7 +210,7 @@ class RavenClientTests: XCTestCase {
             }
 
             if let project = lastEvent["project"] as? String {
-                XCTAssertEqual(project, client.config.projectId!, "Invalid value for project: \(project)")
+                XCTAssertEqual(project, client.config!.projectId!, "Invalid value for project: \(project)")
             }
             else {
                 XCTFail("Project was not a string")

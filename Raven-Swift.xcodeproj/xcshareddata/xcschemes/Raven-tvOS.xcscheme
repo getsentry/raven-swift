@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "63A8B07D1C335347003A99FF"
-               BuildableName = "Raven-tvOS.framework"
+               BuildableName = "Raven.framework"
                BlueprintName = "Raven-tvOS"
                ReferencedContainer = "container:Raven-Swift.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "63A8B07D1C335347003A99FF"
-            BuildableName = "Raven-tvOS.framework"
+            BuildableName = "Raven.framework"
             BlueprintName = "Raven-tvOS"
             ReferencedContainer = "container:Raven-Swift.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "63A8B07D1C335347003A99FF"
-            BuildableName = "Raven-tvOS.framework"
+            BuildableName = "Raven.framework"
             BlueprintName = "Raven-tvOS"
             ReferencedContainer = "container:Raven-Swift.xcodeproj">
          </BuildableReference>
