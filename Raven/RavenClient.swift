@@ -78,11 +78,17 @@ public class RavenClient {
 
     // MARK: - Public Interface
 
-    public func setDSN(DSN: String) {
-        guard let url = NSURL(string: DSN), host = url.host,  projectID = url.pathComponents?.last else { return }
-
-        let publicKey: String = url.user ?? ""
-        let privateKey: String = url.password ?? ""
+    public func setDSN(DSN: String) throws {
+        guard let
+            url = NSURL(string: DSN),
+            host = url.host,
+            projectID =
+            url.pathComponents?.last,
+            user = url.user,
+            password = url.password else {
+                throw NSError(domain: "sentry-auth", code: -1, userInfo: nil)
+            }
+        
         let port = url.port ?? ((url.scheme == "https") ? 443 : 80)
         let server: NSURL! = NSURL(string: "\(url.scheme)://\(host):\(port)")?
             .URLByAppendingPathComponent("api")
@@ -90,7 +96,7 @@ public class RavenClient {
             .URLByAppendingPathComponent("store")
             .URLByAppendingPathComponent("/")
 
-        auth = RavenAuth(serverURL: server, publicKey: publicKey, privateKey: privateKey, projectID: projectID)
+        auth = RavenAuth(serverURL: server, publicKey: user, privateKey: password, projectID: projectID)
     }
 
     /**
@@ -288,7 +294,7 @@ public class RavenClient {
 
     private func sendJSON(JSON: NSData?) {
         guard let auth = auth where debugMode == false else {
-            guard let jsonString = String(data: JSON!, encoding: NSUTF8StringEncoding) else {
+            guard let JSON = JSON, jsonString = String(data: JSON, encoding: NSUTF8StringEncoding) else {
                 print("Could not print JSON using UTF8 encoding")
                 return
             }
@@ -314,9 +320,9 @@ public class RavenClient {
         let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
         let task = session.dataTaskWithRequest(request) { _, response, error in
             if let error = error {
-                let userInfo = error.userInfo as! [String: AnyObject]
-                let errorKey: AnyObject? = userInfo[NSURLErrorFailingURLStringErrorKey]
-                print("Connection failed! Error - \(error.localizedDescription) \(errorKey!)")
+                let userInfo = error.userInfo as? [String: AnyObject]
+                let errorKey: AnyObject? = userInfo?[NSURLErrorFailingURLStringErrorKey]
+                print("Connection failed! Error - \(error.localizedDescription) \(errorKey)")
 
             } else if let response = response {
                 #if DEBUG
