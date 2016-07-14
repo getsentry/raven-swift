@@ -278,8 +278,8 @@ public class RavenClient : NSObject {
     :param: sendNow  Control whether the exception is sent to the server now, or when the app is next opened
     */
     public func captureException(exception:NSException, additionalExtra:[String: AnyObject], additionalTags: [String: AnyObject], sendNow:Bool) {
-        let message = "\(exception.name): \(exception.reason!)"
-        let exceptionDict = ["type": exception.name, "value": exception.reason!]
+        let message = "\(exception.name): \(exception.reason ?? "")"
+        let exceptionDict = ["type": exception.name, "value": exception.reason ?? ""]
 
         let callStack = exception.callStackSymbols
 
@@ -321,7 +321,7 @@ public class RavenClient : NSObject {
     :param: sendNow  Control whether the exception is sent to the server now, or when the app is next opened
     */
     public func captureException(exception: NSException, method:String? = #function, file:String? = #file, line:Int = #line, sendNow:Bool = false) {
-        let message = "\(exception.name): \(exception.reason!)"
+        let message = "\(exception.name): \(exception.reason ?? "")"
         let exceptionDict = ["type": exception.name, "value": exception.reason ?? ""]
 
         var stacktrace = [[String:AnyObject]]()
@@ -461,7 +461,7 @@ public class RavenClient : NSObject {
 
     private func sendJSON(JSON: NSData?) {
         guard let config = self.config else {
-            guard let jsonString = String(data: JSON!, encoding: NSUTF8StringEncoding) else {
+            guard let JSON = JSON, jsonString = String(data: JSON, encoding: NSUTF8StringEncoding) else {
                 print("Could not print JSON using UTF8 encoding")
                 return
             }
@@ -488,9 +488,8 @@ public class RavenClient : NSObject {
         let task = session.dataTaskWithRequest(request, completionHandler: {
             (_, response, error) in
             if let error = error {
-                let userInfo = error.userInfo as! [String: AnyObject]
-                let errorKey: AnyObject? = userInfo[NSURLErrorFailingURLStringErrorKey]
-                print("Connection failed! Error - \(error.localizedDescription) \(errorKey!)")
+                let errorKey: AnyObject? = error.userInfo[NSURLErrorFailingURLStringErrorKey]
+                print("Connection failed! Error - \(error.localizedDescription) \(errorKey ?? "")")
 
             } else if let response = response {
                 #if DEBUG
